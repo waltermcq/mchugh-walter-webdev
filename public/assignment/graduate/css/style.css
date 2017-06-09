@@ -14,8 +14,8 @@ body {
 }
 
 .navbar-default {
-    background-color: darkblue;
-    border-color: darkblue;
+    background-color: #337ab7;
+    border-color: #337ab7;
 }
 
 .navbar-default .navbar-brand {
@@ -49,4 +49,13 @@ body {
     opacity: 0.9;
     padding: 5px;
     border-bottom-left-radius: 10px;
+}
+
+a:hover {
+    text-decoration-line: none;
+}
+
+
+nav.navbar.navbar-default.navbar-fixed-bottom {
+    padding-right: 15px;
 }
