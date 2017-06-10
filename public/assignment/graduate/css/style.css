@@ -18,6 +18,11 @@ body {
     border-color: #337ab7;
 }
 
+.navbar-flat {
+    background-color: #dddddd;
+    border-color: #dddddd;
+}
+
 .navbar-default .navbar-brand {
     color: white;
 }
@@ -59,3 +64,4 @@ a:hover {
 nav.navbar.navbar-default.navbar-fixed-bottom {
     padding-right: 15px;
 }
+
