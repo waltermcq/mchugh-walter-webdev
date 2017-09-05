@@ -8,7 +8,7 @@ About the Author
 About this Repository
 
  This repository is for a  web app / series of web apps created for Northeastern's CS5610 course.  The single-page dynamic apps are built on the MEAN stack,
- and the most recently commit is deployed to Heroku (the database uses the mlab MongoDB plugin).
+ and the most recent commit is deployed to Heroku (the database uses the mlab MongoDB plugin).
 
  The link to the hosted environment is:
  https://mchugh-walter-webdev.herokuapp.com/
