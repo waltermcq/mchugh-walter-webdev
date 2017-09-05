@@ -1,0 +1,70 @@
+
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/login" class="navbar-link ">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#!/user/{{model.uid}}">
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateProfile(model.user)">
+                    <span class="glyphicon glyphicon-ok pull-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text"
+                   class="form-control"
+                   id="username"
+                   readonly
+                   ng-model="model.user.username">
+
+
+            <label for="email">Email address</label>
+            <input type="email"
+                   class="form-control"
+                   id="email"
+                   placeholder="you@website.com">
+
+
+            <label for="first-name">First Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="first-name"
+                   ng-model="model.user.firstName">
+
+
+            <label for="last-name">Last Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="last-name"
+                   ng-model="model.user.lastName">
+        </div>
+    </form>
+
+    <a class="btn btn-primary btn-block"
+       href="#!/user/{{model.user._id}}/website">Websites</a>
+
+    <a class="btn btn-danger btn-block"
+       href="#!/login">Logout</a>
+</div>
+
+<nav class="navbar navbar-fixed-bottom navbar-flat">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#!/user/{{model.uid}}/" class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </p>
+    </div>
+</nav>

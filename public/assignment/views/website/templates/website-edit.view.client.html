@@ -1,0 +1,96 @@
+
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/user/{{model.uid}}/website" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#!/user/{{model.uid}}/website/{{model.wid}}">
+                Edit Website
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWebsite(model.website)">
+                    <span class="glyphicon glyphicon-ok pull-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-4 hidden-xs wd-scrollable-">
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 col-xs-10">
+                            Name
+                        </div>
+                        <div class="col-lg-3 visible-lg">
+                            Created
+                        </div>
+                        <div class="col-md-3 hidden-sm hidden-xs">
+                            Accessed
+                        </div>
+                        <div class="col-xs-2">
+
+                        </div>
+                    </div>
+                </li>
+                <li ng-repeat="website in model.websites" class="list-group-item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 col-xs-10">
+                            <a href="../page/page-listl.view.client.html">
+                                {{website.name}}
+                            </a>
+                        </div>
+                        <div class="col-lg-3 visible-lg">
+                            {{website.created | date}}
+                        </div>
+                        <div class="col-md-3 hidden-sm hidden-xs">
+                            {{website.updated | date}}
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <a href="#!/user/{{model.uid}}/website/{{website._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+
+            <label for="name">Name</label>
+            <input class="form-control"
+                   ng-model="model.website.name"
+                   id="name"/>
+
+            <label for="description">Description</label>
+            <textarea id="description"
+                      rows="5"
+                      ng-model="model.website.description"
+                      class="form-control"></textarea>
+
+            <a href="#!/user/{{model.uid}}/website"
+               class="btn btn-block btn-primary">
+               Cancel
+            </a>
+
+            <a ng-click="model.deleteWebsite(model.wid)"
+               class="btn btn-block btn-danger">
+                Delete
+            </a>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-fixed-bottom navbar-flat">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#!/user/{{model.uid}}/" class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </p>
+    </div>
+</nav>

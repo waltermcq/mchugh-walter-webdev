@@ -1,0 +1,70 @@
+<div ng-class="wd-widget-list">
+
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page" class="navbar-link ">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
+                Widgets
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/new" class="navbar-link ">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<!--TODO Add left column scrollbar-->
+<div class="container-fluid">
+    <div ng-repeat="widget in model.widgets" class="wd-widget">
+        <div class="wd-widget-toolbar">
+            <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        <!--simpler but breaks HTML cert process, TODO implement-->
+        <!--<div ng-include="model.getWidgetUrlForType(widget.widgetType)"></div>-->
+        <div  ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADING">
+                <div ng-include="'views/widget/templates/widget-heading.view.client.html'"></div>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <div ng-include="'views/widget/templates/widget-image.view.client.html'"></div>
+            </div>
+            <div ng-switch-when="HTML"
+                 ng-bind-html="model.trustThisContent(widget.text)">
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <div ng-include="'views/widget/templates/widget-youtube.view.client.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--TODO Fix this footer design/visual   -->
+<nav class="navbar navbar-fixed-bottom navbar-flat">
+    <div class="container-fluid">
+        <p class="navbar-text pull-left">
+            <a href="#" class="navbar-link">
+                <span class="glyphicon glyphicon-play"></span>
+            </a>
+        </p>
+        <p class="navbar-text pull-left">
+            <a href="#" class="navbar-link">
+                <span class="glyphicon glyphicon-eye-open"></span>
+            </a>
+        </p>
+        <p class="navbar-text pull-right">
+            <a href="#" class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </p>
+    </div>
+</nav>
+
