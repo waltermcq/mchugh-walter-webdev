@@ -19,7 +19,6 @@
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.getWidgetUrlForType = getWidgetUrlForType;
 
-        // starting logic; TODO make this IIFE?
         (function init(){
             model.widgets = widgetService.findWidgetsByPageId(model.pid);
         })();
@@ -107,29 +106,29 @@
 
         function createWidget(widget){
             var pageId = model.pid;
-            var newId = model.pid + model.wid;
+            var newId = new Date();
             widget._id = newId.toString();
             widgetService.createWidget(pageId, widget);
             $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + widget._id);
         }
 
         function createHeaderWidget(){
-            var headerWidget = {"id_": "", "widgetType":"HEADING", "pageId": model.pid, "size":2, "text":"Lorem"};
+            var headerWidget = {"_id": "", "widgetType":"HEADING", "pageId": model.pid, "size":2, "text":"Lorem"};
             model.createWidget(headerWidget);
         }
 
         function createImageWidget(){
-            var imageWidget = {"id_": "", "widgetType":"IMAGE", "pageId": model.pid, "width":"100%", "url":"http://lorempixel.com/400/200/"};
+            var imageWidget = {"_id": "", "widgetType":"IMAGE", "pageId": model.pid, "width":"100%", "url":"http://lorempixel.com/400/200/"};
             model.createWidget(imageWidget);
         }
 
         function createYouTubeWidget(){
-            var youTubeWidget = {"id_": "", "widgetType":"YOUTUBE", "pageId": model.pid, "width":"100%", "url": "https://youtu.be/AM2Ivdi9c4E"};
+            var youTubeWidget = {"_id": "", "widgetType":"YOUTUBE", "pageId": model.pid, "width":"100%", "url": "https://youtu.be/AM2Ivdi9c4E"};
             model.createWidget(youTubeWidget);
         }
 
         function createHTMLWidget(){
-            var hTMLWidget = {"id_": "", "widgetType":"HTML", "pageId": model.pid, "text":"<p>Lorem ipsum</p>"};
+            var hTMLWidget = {"_id": "", "widgetType":"HTML", "pageId": model.pid, "text":"<p>Lorem ipsum</p>"};
             model.createWidget(hTMLWidget);
         }
 
