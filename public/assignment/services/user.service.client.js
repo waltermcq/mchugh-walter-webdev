@@ -31,7 +31,10 @@
 
         function findUserById(userId){
             var url = '/api/user/' + userId;
-            return $http.get(url);
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;       //unwrap data from response object; transparent to controller
+                });
 
             // return users.find(function (user) {
             //     return user._id === userId;

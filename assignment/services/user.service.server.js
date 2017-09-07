@@ -16,6 +16,7 @@ var app =  require('../../express');
 // app.delete('/api/user/:userId', deleteUser);
 // app.get('/api/user/', findUser);
 app.get('/api/user/:userId', findUserById);
+app.get('/api/user', findUserByCredentials);
 
 var users = [
     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -30,4 +31,20 @@ function findUserById(req, res){
         return user._id === userId;
     });
     res.send(user);
+}
+
+function findUserByCredentials(req, res){
+    var username = req.query['username'];
+    var password = req.query['password'];
+
+    for(var u in users) {
+        var user = users[u];
+        if(user.username === username &&
+            user.password === password) {
+            res.json(user);                       //like .send but specifically for JSON
+            return;
+        }
+    }
+    res.sendStatus (404);  //user not found
+
 }

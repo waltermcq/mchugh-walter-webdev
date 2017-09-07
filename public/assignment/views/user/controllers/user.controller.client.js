@@ -73,16 +73,9 @@
                 .then(renderUser);
         })();
 
-        function renderUser(response){        //callback - when server provides response, run inner FUN
-            model.user = response.data;
+        function renderUser(user){        //callback - when server provides response, run inner FUN
+            model.user = user;
         }
-
-        // (function init(){
-        //     userService.findUserById(model.uid)
-        //         .then(function(response){
-        //             model.user = response.data;
-        //         })
-        // })();
 
         function updateProfile(user) {
             userService.updateUser(model.uid, user);
