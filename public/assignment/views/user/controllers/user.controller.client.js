@@ -67,7 +67,10 @@
         model.updateProfile = updateProfile;
 
         (function init(){
-            model.user = userService.findUserById(model.uid);
+            userService.findUserById(model.uid)
+                .then(function(response){
+                    model.user = response.data;
+                })
         })();
 
         function updateProfile(user) {
