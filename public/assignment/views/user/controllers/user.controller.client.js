@@ -58,8 +58,12 @@
                     username: username,
                     password: password
                 };
-                userService.createUser(user);
-                $location.url('/user/' + user._id)
+                userService
+                    .createUser(user)
+                    .then( function(user) {
+                        $location.url('/user/' + user._id)
+                    });
+
             }
         }
     } //registerController

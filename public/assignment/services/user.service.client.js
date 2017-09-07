@@ -24,9 +24,12 @@
         return api;
 
         function createUser(user){
-            user._id = (new Date()).getTime() + "";
-            users.push(user);
 
+            var url = '/api/user';
+            return $http.post(url, user)   // url, then data
+                .then( function(response){
+                    return response.data;
+                    });
         }
 
         function findUserById(userId){

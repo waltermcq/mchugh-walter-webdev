@@ -11,10 +11,12 @@
 
 var app =  require('../../express');
 
-// app.get('/api/user/', createUser);
+// endpoints
 // app.put('/api/user/:userId', updateUser);
 // app.delete('/api/user/:userId', deleteUser);
 // app.get('/api/user/', findUser);
+
+app.post('/api/user/', createUser);
 app.get('/api/user/:userId', findUserById);
 app.get('/api/user', findUserByCredentials);
 
@@ -24,6 +26,13 @@ var users = [
     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
 ];
+
+function createUser(req, res){
+    var user = req.body;
+    user._id = (new Date()).getTime() + "";
+    users.push(user);
+    res.send(user);
+}
 
 function findUserById(req, res){
     var userId = req.params['userId'];
@@ -48,3 +57,4 @@ function findUserByCredentials(req, res){
     res.sendStatus (404);  //user not found
 
 }
+
