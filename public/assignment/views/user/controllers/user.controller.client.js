@@ -10,19 +10,28 @@
                              userService) {
 
         var model = this;
-
-        // event handler
         model.login = login;
 
         // event handler implementation
         function login(username, password) {
-            var found = userService.findUserByCredentials(username, password);
-            if(found !== null) {
-                $location.url('/user/' + found._id);
-            } else {
-                model.message = "Username " + username + " not found";
+
+            userService
+                .findUserByCredentials(username, password)
+                .then(loginUser, loginError);
+        }// login
+
+        function loginUser(user){
+            if(user !== null) {
+                $location.url('/user/' + user._id);
+            }
+            else {model.message = "Something went wrong!"
             }
         }
+
+        function loginError(user){
+            model.message = "Username " + username + " not found";
+        }
+
     }  //loginController
 
     function registerController($location,

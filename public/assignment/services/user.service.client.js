@@ -52,13 +52,11 @@
         }
 
         function findUserbyCredentials(username, password) {
-            for(var u in users) {
-                var user = users[u];
-                if(user.username === username && user.password === password) {
-                    return user;
-                }
-            }
-            return null;
+            var url = '/api/user/?username=' + username + "&password=" + password;
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;       //unwrap data from response object; transparent to controller
+                });
         }
 
         function updateUser(userId, user){
