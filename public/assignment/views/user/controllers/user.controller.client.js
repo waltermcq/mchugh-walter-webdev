@@ -68,13 +68,14 @@
 
         (function init(){
 
-            var promise = userService.findUserById(model.uid);
-
-            promise
-                .then(function(response){        //callback - when server provides response, run inner FUN
-                    model.user = response.data;
-                })
+            userService
+                .findUserById(model.uid)         //return 'promise object'
+                .then(renderUser);
         })();
+
+        function renderUser(response){        //callback - when server provides response, run inner FUN
+            model.user = response.data;
+        }
 
         // (function init(){
         //     userService.findUserById(model.uid)
