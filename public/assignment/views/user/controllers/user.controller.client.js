@@ -17,8 +17,12 @@
 
             userService
                 .findUserByCredentials(username, password)
-                .then(loginUser, loginError);
-        }// login
+                .then(loginUser, loginError);                   // .then(success, failure)
+
+            function loginError(user){ // TODO implement improved error message
+                model.message = "Username " + username + " not found";
+            }
+        }
 
         function loginUser(user){
             if(user !== null) {
@@ -26,12 +30,7 @@
             }
             else {model.message = "Something went wrong!"
             }
-        }
-
-        function loginError(user){
-            model.message = "Username " + username + " not found";
-        }
-
+        } //loginUser
     }  //loginController
 
     function registerController($location,
