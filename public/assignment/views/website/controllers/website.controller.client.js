@@ -14,7 +14,11 @@
 
         // identify logic that should run at start
         (function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
+            websiteService
+                .findWebsitesByUser(model.uid)
+                .then( function(response){
+                    model.websites = response;
+                });
         })();
     }
 
