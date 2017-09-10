@@ -63,20 +63,19 @@
         }
 
         function updateUser(userId, user){
-
             var url = '/api/user/' + userId;
             return $http.put(url, user)
                 .then( function(response){
-                    return response.data;       //unwrap data from response object; transparent to controller
+                    return response.data;
                 });
         }
 
         function deleteUser(userId){
-            var user = user.find( function(user){
-                return user._id === userId;
-            });
-            var index = users.indexOf(user);
-            users.splice(index, 1);
+            var url = '/api/user/' + userId;
+            return $http.delete(url)
+                .then( function(response){
+                    return response.data;
+                });
         }
     }
 

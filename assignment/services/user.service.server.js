@@ -13,13 +13,14 @@ var app =  require('../../express');
 
 // endpoints
 //
-// app.delete('/api/user/:userId', deleteUser);
+
 // app.get('/api/user/', findUser);
 
-app.post('/api/user/', createUser);
-app.get ('/api/user/:userId', findUserById);
-app.get ('/api/user', findUserByCredentials);
-app.put ('/api/user/:userId', updateUser);
+app.post  ('/api/user/', createUser);
+app.get   ('/api/user/:userId', findUserById);
+app.get   ('/api/user', findUserByCredentials);
+app.put   ('/api/user/:userId', updateUser);
+app.delete('/api/user/:userId', deleteUser);
 
 var users = [
     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -71,4 +72,14 @@ function updateUser(req, res){  //userId, user
         }
     }
     res.sendStatus(404);  //user not found
+}
+
+function deleteUser(req, res){
+    var userId = req.params.userId;
+    var user = users.find( function(user){
+        return user._id === userId;
+    });
+    var index = users.indexOf(user);
+    users.splice(index, 1);
+    res.sendStatus(200);                //TODO ADD VALIDATION LIKE UPDATEUSER(); RETURN 404 if not found
 }

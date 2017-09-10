@@ -77,6 +77,7 @@
         model.uid = $routeParams['uid'];
 
         model.updateProfile = updateProfile;
+        model.deleteProfile = deleteProfile;
 
         (function init(){
 
@@ -95,7 +96,15 @@
                 .then(function () {
                     model.message = "Profile updated successfully!";
                 });
-            $location.url('/user/'+model.uid);
+            // $location.url('/user/'+model.uid);
+        }
+
+        function deleteProfile(user) {
+            userService
+                .deleteUser(user._id)
+                .then(function () {
+                    $location.url('/login');  //TODO add failure branch
+                });
         }
 
     }
