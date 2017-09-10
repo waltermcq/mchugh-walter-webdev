@@ -19,6 +19,8 @@
     </div>
 </nav>
 
+{{model.message}}
+
 <div class="container-fluid">
     <form>
         <div class="form-group">
@@ -34,7 +36,7 @@
             <input type="email"
                    class="form-control"
                    id="email"
-                   placeholder="you@website.com">
+                   ng-model="model.user.email">
 
 
             <label for="first-name">First Name</label>

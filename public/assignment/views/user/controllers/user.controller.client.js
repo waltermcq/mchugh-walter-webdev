@@ -90,7 +90,11 @@
         }
 
         function updateProfile(user) {
-            userService.updateUser(model.uid, user);
+            userService
+                .updateUser(model.uid, user)
+                .then(function () {
+                    model.message = "Profile updated successfully!";
+                });
             $location.url('/user/'+model.uid);
         }
 
