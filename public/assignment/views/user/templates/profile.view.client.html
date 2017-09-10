@@ -19,9 +19,15 @@
     </div>
 </nav>
 
-{{model.message}}
+
 
 <div class="container-fluid">
+
+    <div ng-show="model.message"
+         class="alert alert-info">
+        {{model.message}}
+    </div>
+
     <form>
         <div class="form-group">
             <label for="username">Username</label>

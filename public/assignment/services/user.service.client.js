@@ -65,10 +65,10 @@
         function updateUser(userId, user){
 
             var url = '/api/user/' + userId;
-            return $http.put(url, user);
-                // .then( function(response){
-                //     return response;       //unwrap data from response object; transparent to controller
-                // });
+            return $http.put(url, user)
+                .then( function(response){
+                    return response.data;       //unwrap data from response object; transparent to controller
+                });
         }
 
         function deleteUser(userId){
