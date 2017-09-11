@@ -2,14 +2,10 @@
 
     <label for="name">Name</label>
     <input class="form-control"
-           placeholder=""
-           value=""
            id="name"/>
 
     <label for="text">Text</label>
     <input class="form-control"
-           placeholder=""
-           value=""
            id="text"/>
 
     <label for="text">URL</label>
@@ -22,10 +18,14 @@
            ng-model="model.widget.width"
            id="text"/>
 
-    <label for="file">Upload</label>
-    <input id="file" type="file" class="form-control"/>
-
-    <a href=""
-       class="btn btn-block btn-primary">Upload Image</a>
+    <form action="/api/upload"   method="post" enctype="multipart/form-data">
+        <input  name="myFile"    type="file" class="form-control"/>
+        <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
+        <input  name="userId"    value="{{model.uid}}"   style="display: none"/>
+        <input  name="websiteId" value="{{model.wid}}"   style="display: none"/>
+        <input  name="pageId"    value="{{model.pid}}"   style="display: none"/>
+        <input  name="widgetId"  value="{{model.widget._id}}"   style="display: none"/>
+        <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+    </form>
 
 </div>
