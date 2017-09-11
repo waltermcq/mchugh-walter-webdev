@@ -65,15 +65,6 @@
             model.widget = widgetService.findWidgetById(model.wgid)
         })();
 
-        // TESTING ONLY
-        // function createWidget(widget){
-        //     var pageId = model.pid;
-        //     var newId = model.pid + model.wid;
-        //     widget._id = newId.toString();
-        //     widgetService.createWidget(pageId, widget);
-        //     $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + widget._id); // this URL is wrong
-        // }
-
         function updateWidget(widget) {
             widgetService.updateWidget(model.wgid, widget);
             $location.url('/user/' + model.uid + '/website/' +model.wid + '/page/' + model.pid + '/widget');
@@ -140,33 +131,40 @@
                                           flickrService,
                                           $location) {
 
-        var model = this;
-        model.uid = $routeParams['uid'];
-        model.wid = $routeParams['wid'];
-        model.pid = $routeParams['pid'];
+        var model  = this;
+        model.uid  = $routeParams['uid'];
+        model.wid  = $routeParams['wid'];
+        model.pid  = $routeParams['pid'];
         model.wgid = $routeParams['wgid'];
 
         // event handlers for flickr search
         model.searchPhotos = searchPhotos;
-        model.selectPhotos = selectPhotos;
+        model.selectPhoto = selectPhoto;
 
-        (function init(){
-            model.searchText = {};
-        })();
+        // (function init(){
+        //     model.searchText = {};
+        // })();
 
         function searchPhotos(searchTerm) {
 
             flickrService
                 .searchPhotos(searchTerm)
                 .then(function(response) {
-                    data = response.data.replace("jsonFlickrApi(","");
-                    data = data.substring(0,data.length - 1);
-                    data = JSON.parse(data);
+                    data = response.data.replace("jsonFlickrApi(","");  // this cleans up the JSON response from flickr
+                    data = data.substring(0,data.length - 1);           // remove last parenthesis (cleaning)
+                    data = JSON.parse(data);                            // parse string to JSON
                     model.photos = data.photos;
                 });
         }
 
-        function selectPhotos(searchText) {
+        function selectPhoto(photo) {
+            console.log(photo);         // TODO the console has the original object, now we can use the guts to recreate the URL...?
+
+            var url = "https://farm" +photo.farm + "staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+
+        // var new widget object
+
+        // call widgetservice.update widget, then nagivate to the widget ID with $location
 
         }
 
