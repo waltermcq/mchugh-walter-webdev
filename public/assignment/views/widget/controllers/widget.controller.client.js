@@ -137,22 +137,36 @@
 
     function flickrImageSearchController($routeParams,
                                           widgetService,
+                                          flickrService,
                                           $location) {
 
         var model = this;
         model.uid = $routeParams['uid'];
         model.wid = $routeParams['wid'];
         model.pid = $routeParams['pid'];
+        model.wgid = $routeParams['wgid'];
 
-        // event handlers for widget type link click
-        model.doThis = doThis;
+        // event handlers for flickr search
         model.searchPhotos = searchPhotos;
+        model.selectPhotos = selectPhotos;
 
         (function init(){
             model.searchText = {};
         })();
 
-        function searchPhotos(searchText) {
+        function searchPhotos(searchTerm) {
+
+            flickrService
+                .searchPhotos(searchTerm)
+                .then(function(response) {
+                    data = response.data.replace("jsonFlickrApi(","");
+                    data = data.substring(0,data.length - 1);
+                    data = JSON.parse(data);
+                    model.photos = data.photos;
+                });
+        }
+
+        function selectPhotos(searchText) {
 
         }
 

@@ -21,12 +21,13 @@
 </nav>
 <div class="container-fluid">
     <div ng-include="model.getWidgetUrlForType(model.widget.widgetType)"></div>
+    <div class="container-fluid">
+        <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"
+           class="btn btn-block btn-primary">Cancel</a>
 
-    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"
-       class="btn btn-block btn-primary">Cancel</a>
-
-    <a ng-click="model.deleteWidget()"
-    class="btn btn-block btn-danger">Delete</a>
+        <a ng-click="model.deleteWidget()"
+        class="btn btn-block btn-danger">Delete</a>
+    </div>
 </div>
 <nav class="navbar navbar-fixed-bottom navbar-flat">
  <div class="container-fluid">
