@@ -45,7 +45,7 @@ function uploadImage(req, res) {
     var mimetype      = myFile.mimetype;
 
     // widget = getWidgetById(widgetId);             //TODO define
-    // widget.url = '/assignment/uploads/'+filename;
+    // widget.url = '/assignment/uploads/'+filename; //TODO SET URL!
 
     // var callbackUrl = "/assignment/#/user/" +userId+ "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;  //TODO This should be the URL to go back to the editor.
     var callbackUrl = "/assignment/index.html#!/user/" +userId+ "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;  //TODO This should be the URL to go back to the editor.

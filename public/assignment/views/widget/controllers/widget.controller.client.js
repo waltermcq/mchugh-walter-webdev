@@ -3,7 +3,8 @@
         .module('WebAppMaker')
         .controller('widgetListController', widgetListController)
         .controller('widgetEditController', widgetEditController)
-        .controller('widgetChooserController', widgetChooserController);
+        .controller('widgetChooserController', widgetChooserController)
+        .controller('flickrImageSearchController', flickrImageSearchController);
 
     function widgetListController($sce,
                                   $routeParams,
@@ -134,4 +135,26 @@
 
     }
 
+    function flickrImageSearchController($routeParams,
+                                          widgetService,
+                                          $location) {
+
+        var model = this;
+        model.uid = $routeParams['uid'];
+        model.wid = $routeParams['wid'];
+        model.pid = $routeParams['pid'];
+
+        // event handlers for widget type link click
+        model.doThis = doThis;
+        model.searchPhotos = searchPhotos;
+
+        (function init(){
+            model.searchText = {};
+        })();
+
+        function searchPhotos(searchText) {
+
+        }
+
+    } //flickrImageSearchController
 })();
