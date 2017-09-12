@@ -20,8 +20,11 @@
 
         function createPage(page){
             page.websiteId = model.wid;
-            pageService.createPage(page);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+            pageService
+                .createPage(page)
+                .then( function(){
+                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page');
+                });
         }
     }
 
@@ -31,10 +34,16 @@
         model.uid = $routeParams['uid'];
         model.wid = $routeParams['wid'];
 
-        // identify logic that should run at start
         (function init() {
-            model.pages = pageService.findPageByWebsiteId(model.wid);
+            pageService
+                .findPageByWebsiteId(model.wid)
+                .then(renderPages);
         })();
+
+        function renderPages(pages){
+            model.pages = pages;
+        }
+
     }
 
     function pageEditController($routeParams,
@@ -53,24 +62,36 @@
 
         // identify logic that should run at start
         (function init() {
-            // model.pages = pageService.findPageByWebsiteId(model.wid);
-            model.page = pageService.findPageById(model.pid)
+            pageService
+                .findPageById(model.pid)
+                .then(function(page){
+                    model.page = page;
+                });
         })();
 
         function createPage(page){
             page.websiteId = model.wid;
-            pageService.createPage(page);
-            $location.url('/user/' + model.uid + '/website/' +model.wid + '/page');
+            pageService.
+                createPage(page)
+                .then( function(){
+                    $location.url('/user/' + model.uid + '/website/' +model.wid + '/page');
+                });
         }
 
         function updatePage(page) {
-            pageService.updatePage(model.pid, page);
-            $location.url('/user/' + model.uid + '/website/' +model.wid + '/page');
+            pageService
+                .updatePage(model.pid, page)
+                .then( function(){
+                    $location.url('/user/' + model.uid + '/website/' +model.wid + '/page');
+                });
         }
 
         function deletePage(pid) {
-            pageService.deletePage(pid);
-            $location.url('/user/' + model.uid + '/website/' +model.wid + '/page');
+            pageService
+                .deletePage(pid)
+                .then( function(){
+                    $location.url('/user/' + model.uid + '/website/' +model.wid + '/page');
+                });
         }
     }
 
