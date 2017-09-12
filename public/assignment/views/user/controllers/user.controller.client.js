@@ -49,24 +49,26 @@
                 return;
             }
 
-            // var found = userService.findUserByUsername(username);
-            var found = userService.findUserByUsername(username);
+            userService
+                .findUserByUsername(username)
+                .then( function(response){
+                    if(response === '1'){
+                        model.error = "Username not available; try another.";
+                    }
+                    else {
 
-            if(found !== null) {
-                model.error = "Username is not available";
-            } else {
-                var user = {
-                    username: username,
-                    password: password
-                };
-                userService
-                    .createUser(user)
-                    .then( function(user) {
-                        $location.url('/user/' + user._id)
-                    });
-
-            }
-        }
+                        var user = {
+                            username: username,
+                            password: password
+                        };
+                        userService
+                            .createUser(user)
+                            .then( function(user) {
+                                $location.url('/user/' + user._id)
+                            });
+                    }
+                });
+        } //register
     } //registerController
 
     function profileController($location,
