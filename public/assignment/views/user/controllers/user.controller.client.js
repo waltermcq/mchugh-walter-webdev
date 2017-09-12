@@ -44,7 +44,7 @@
         // event handler implementation
         function register(username, password, password2) {
 
-            if (password !== password2){
+            if (password !== password2){                    //TODO more robust username and password checking
                 model.error = "Passwords must match!";
                 return;
             }

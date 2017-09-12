@@ -33,8 +33,6 @@ function findUserById(req, res){
     res.send(user);
 }
 
-
-
 function updateUser(req, res){  //userId, user
     var userId = req.params.userId;
     var user = req.body;

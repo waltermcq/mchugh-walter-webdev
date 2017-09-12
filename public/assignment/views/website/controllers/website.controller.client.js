@@ -32,11 +32,17 @@
         // event handler for 'create' button
         model.createWebsite = createWebsite;
 
-        // identify logic that should run at start
-        // feeds left hand side of template i.e. list
+        // init feeds left hand side of template i.e. list
         (function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
+
+            websiteService
+                .findWebsitesByUser(model.uid)
+                .then(renderWebsites);
         })();
+
+        function renderWebsites(websites){
+            model.websites = websites;
+        }
 
         function createWebsite(website){
             website.developerId = model.uid;
@@ -65,24 +71,41 @@
         // identify logic that should run at start
         // feeds left hand side of template i.e. list
         (function init() {
-            model.websites = websiteService.findWebsitesByUser(model.uid);
-            model.website = websiteService.findWebsiteById(model.wid)
+
+            websiteService.findWebsitesByUser(model.uid)
+                .then( function(response){
+                    model.websites = response;
+                });
+
+            websiteService.findWebsiteById(model.wid)
+                .then( function(response){
+                    model.website = response;
+                });
         })();
 
         function createWebsite(website){
             website.developerId = model.uid;
-            websiteService.createWebsite(website);
-            $location.url('/user/' + model.uid + '/website');
+            websiteService
+                .createWebsite(website)
+                .then(function(){
+                    $location.url('/user/' + model.uid + '/website');
+                });
         }
 
         function updateWebsite(website) {
-            websiteService.updateWebsite(model.wid, website);
-            $location.url('/user/'+model.uid+'/website');
+            websiteService.updateWebsite(model.wid, website)
+                .then( function(){
+                    $location.url('/user/'+model.uid+'/website');
+                });
         }
 
         function deleteWebsite(wid) {
-            websiteService.deleteWebsite(wid);
-            $location.url('/user/'+model.uid+'/website');
+            websiteService
+                .deleteWebsite(wid)
+                .then( function(){
+                    $location.url('/user/'+model.uid+'/website');
+                });
+
         }
     } //websiteEditController
 })();
