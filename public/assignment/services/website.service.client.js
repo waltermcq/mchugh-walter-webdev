@@ -32,11 +32,14 @@
         }
 
         function createWebsite(website){
-            website._id = (new Date()).getTime() + "";
-            website.created = new Date();
-            website.updated = new Date();
-            websites.push(website);                          //push to current array of sites
 
+            var userId = website.developerId;
+            var url = "/api/user/" + userId + "/website";
+
+            return $http.post(url, website)
+                .then( function(response){
+                    return response.data;
+                });
         }
 
         function updateWebsite(websiteId, website){

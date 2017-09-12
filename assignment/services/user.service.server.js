@@ -1,24 +1,13 @@
 
 // check piazza about this: "about endpoints in express"
-//
-// HTTP Method, URL Pattern, Function Name
-// POST    /api/user                                           createUser
-// GET     /api/user?username=username                         findUserByUsername
-// GET     /api/user?username=username&password=password       findUserByCredentials
-// GET     /api/user/:userId                                   findUserById
-// PUT     /api/user/:userId                                   updateUser
-// DELETE  /api/user/:userId                                   deleteUser
 
 var app =  require('../../express');
 
 // endpoints
-//
-
-// app.get('/api/user/', findUser);
-
 app.post  ('/api/user/', createUser);
 app.get   ('/api/user/:userId', findUserById);
 app.get   ('/api/user', findUserByCredentials);
+app.get   ('/api/username', findUserByUsername);
 app.put   ('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
 
@@ -44,21 +33,7 @@ function findUserById(req, res){
     res.send(user);
 }
 
-function findUserByCredentials(req, res){
-    var username = req.query['username'];
-    var password = req.query['password'];
 
-    for(var u in users) {
-        var user = users[u];
-        if(user.username === username &&
-            user.password === password) {
-            res.json(user);                       //like .send but specifically for JSON
-            return;
-        }
-    }
-    res.sendStatus (404);  //user not found
-
-}
 
 function updateUser(req, res){  //userId, user
     var userId = req.params.userId;
@@ -82,4 +57,34 @@ function deleteUser(req, res){
     var index = users.indexOf(user);
     users.splice(index, 1);
     res.sendStatus(200);                //TODO ADD VALIDATION LIKE UPDATEUSER(); RETURN 404 if not found
+}
+
+function findUserByCredentials(req, res){
+    var username = req.query['username'];
+    var password = req.query['password'];
+
+    for(var u in users) {
+        var user = users[u];
+        if(user.username === username &&
+            user.password === password) {
+            res.json(user);                       //like .send but specifically for JSON
+            return;
+        }
+    }
+    res.sendStatus (404);  //user not found
+
+}
+
+function findUserByUsername(req, res){
+
+    var username = req.query['username'];
+
+    for(var u in users) {
+        var user = users[u];
+        if(user.username === username) {
+            res.send("1");
+            return;
+        }
+    }
+    res.send(username);  //user not found
 }

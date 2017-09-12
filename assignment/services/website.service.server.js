@@ -18,7 +18,9 @@ var websites = [
     { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
 ];
 
+app.post('/api/user/:userId/website', createWebsite);
 app.get('/api/user/:userId/website', findWebsitesByUser);
+
 
 function findWebsitesByUser(req, res){
 
@@ -32,4 +34,13 @@ function findWebsitesByUser(req, res){
         }
     }
     res.json(resultSet);
+}
+
+function createWebsite(req, res){
+    var website = req.body;
+    website._id = (new Date()).getTime() + "";
+    website.created = new Date();
+    website.updated = new Date();
+    websites.push(website);
+    res.send(website);
 }

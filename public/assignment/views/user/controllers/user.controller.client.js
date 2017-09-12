@@ -49,6 +49,7 @@
                 return;
             }
 
+            // var found = userService.findUserByUsername(username);
             var found = userService.findUserByUsername(username);
 
             if(found !== null) {

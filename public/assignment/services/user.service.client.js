@@ -31,27 +31,22 @@
                 .then( function(response){
                     return response.data;       //unwrap data from response object; transparent to controller
                 });
-
-            // return users.find(function (user) {
-            //     return user._id === userId;
-            // });
         }
 
         function findUserByUsername(username){
-            var user = users.find(function (user){
-                return user.username === username;
-            });
-            if(typeof user === 'undefined')
-                return null;
-            else
-                return user;
+            var url = '/api/username/?username=' + username;
+
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;
+                });
         }
 
         function findUserbyCredentials(username, password) {
             var url = '/api/user/?username=' + username + "&password=" + password;
             return $http.get(url)
                 .then( function(response){
-                    return response.data;       //unwrap data from response object; transparent to controller
+                    return response.data;
                 });
         }
 
