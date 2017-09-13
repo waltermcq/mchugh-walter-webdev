@@ -43,7 +43,7 @@ function findPageByWebsiteId(req, res){
 }
 
 function findPageById(req, res){
-    var pageId = req.params['pageId']
+    var pageId = req.params['pageId'];
 
     var page = pages.find(function (page) {
         return page._id === pageId;

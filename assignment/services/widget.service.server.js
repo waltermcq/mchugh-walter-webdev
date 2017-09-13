@@ -1,10 +1,8 @@
 
 
-// POST        /api/page/:pageId/widget        createWidget
-// GET         /api/page/:pageId/widget        findAllWidgetsForPage
-// GET         /api/widget/:widgetId           findWidgetById
-// PUT         /api/widget/:widgetId           updateWidget
-// DELETE      /api/widget/:widgetId           deleteWidget
+
+
+
 
 var app =  require('../../express');
 
@@ -13,7 +11,12 @@ var multer = require('multer');
 var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
 
 // endpoints
-app.post ("/api/upload", upload.single('myFile'), uploadImage);
+app.post  ('/api/page/:pageId/widget', createWidget);
+app.post  ('/api/upload', upload.single('myFile'), uploadImage);
+app.get   ('/api/page/:pageId/widget', findWidgetsByPageId);
+app.get   ('/api/widget/:widgetId', findWidgetById);
+app.put   ('/api/widget/:widgetId', updateWidget);
+app.delete('/api/widget/:widgetId', deleteWidget)
 
 var widgets = [
     { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -44,12 +47,70 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    // widget = getWidgetById(widgetId);             //TODO define
-    // widget.url = '/assignment/uploads/'+filename; //TODO SET URL!
+    widget = findWidgetById(widgetId);             //TODO define
+    widget.url = '/assignment/uploads/'+filename; //TODO SET URL!
 
-    // var callbackUrl = "/assignment/#/user/" +userId+ "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;  //TODO This should be the URL to go back to the editor.
     var callbackUrl = "/assignment/index.html#!/user/" +userId+ "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;  //TODO This should be the URL to go back to the editor.
 
     res.redirect(callbackUrl);
 }
 
+function findWidgetsByPageId(req, res){
+
+    var pageId = req.params['pageId'];
+
+    var resultSet = [];
+    for(var w in widgets){
+        if(widgets[w].pageId === pageId){
+            resultSet.push(widgets[w]);
+        }
+    }
+    res.json(resultSet);
+}
+
+function findWidgetById(req, res){
+    var widgetId = req.params['widgetId']
+
+    var widget = widgets.find(function (widget) {
+        return widget._id === widgetId;
+    });
+    res.send(widget);
+}
+
+function createWidget(req, res){
+    var pageId = req.params['pageId'];
+    var widget = req.body;
+    widget._id = (new Date()).getTime() + "";
+    widget.pageId = pageId;
+    widgets.push(widget);
+    res.send(widget);
+}
+
+function updateWidget(req, res){
+    var widgetId = req.params['widgetId']
+    var widget = req.body;
+
+    for(var w in widgets){
+        if(widgets[w]._id === widgetId){
+            widgets[w] = widget;
+            res.sendStatus(200);
+            return;
+        }
+    }
+    res.sendStatus(404);
+}
+
+
+function deleteWidget(req, res){
+    var widgetId = req.params['widgetId'];
+
+    for(var w in widgets){
+        if(widgets[w]._id === widgetId){
+            var index = widgets.indexOf(widgets[w]);
+            widgets.splice(index, 1);
+            res.sendStatus(200);
+            return;
+        }
+    }
+    res.sendStatus(404);
+}

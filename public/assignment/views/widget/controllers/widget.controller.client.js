@@ -21,7 +21,11 @@
         model.getWidgetUrlForType = getWidgetUrlForType;
 
         (function init(){
-            model.widgets = widgetService.findWidgetsByPageId(model.pid);
+            widgetService
+                .findWidgetsByPageId(model.pid)
+                .then( function(widgets){
+                    model.widgets = widgets;
+                });
         })();
 
         // sign content to make angular happy when displaying exogenous HTML
@@ -35,7 +39,6 @@
             var youTubeLinkParts = youTubeLink.split('/');
             var id = youTubeLinkParts[youTubeLinkParts.length - 1];
             embedUrl += id;
-            console.log(embedUrl);
             return $sce.trustAsResourceUrl(embedUrl);
         }
 
@@ -58,24 +61,33 @@
         model.updateWidget = updateWidget;
         model.deleteWidget = deleteWidget;
         model.getWidgetUrlForType = getWidgetUrlForType;
-        // model.createWidget = createWidget;
 
         // identify logic that should run at start
         (function init() {
-            model.widget = widgetService.findWidgetById(model.wgid)
+            widgetService
+                .findWidgetById(model.wgid)
+                .then( function(widget){
+                    model.widget = widget;
+                });
         })();
 
         function updateWidget(widget) {
-            widgetService.updateWidget(model.wgid, widget);
-            $location.url('/user/' + model.uid + '/website/' +model.wid + '/page/' + model.pid + '/widget');
+            widgetService
+                .updateWidget(model.wgid, widget)
+                .then( function(){
+                    $location.url('/user/' + model.uid + '/website/' +model.wid + '/page/' + model.pid + '/widget');
+                });
         }
 
         function deleteWidget() {
-            widgetService.deleteWidget(model.wgid);
-            $location.url('/user/' + model.uid + '/website/' +model.wid + '/page/' + model.pid + '/widget');
+            widgetService
+                .deleteWidget(model.wgid)
+                .then( function(){
+                $location.url('/user/' + model.uid + '/website/' +model.wid + '/page/' + model.pid + '/widget');
+            });
         }
 
-        function getWidgetUrlForType(type) {
+        function getWidgetUrlForType(type) {  //TODO this executes before the init() sets the model widget.  fix.
             return 'views/widget/templates/widget-'+type.toLowerCase()+'-edit.view.client.html';
         }
     }
@@ -97,11 +109,12 @@
         model.createHTMLWidget    = createHTMLWidget;
 
         function createWidget(widget){
-            var pageId = model.pid;
-            var newId = new Date();
-            widget._id = newId.toString();
-            widgetService.createWidget(pageId, widget);
-            $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + widget._id);
+            widget.pageId = model.pid;  //TODO do this in the widget client service
+            widgetService
+                .createWidget(widget)
+                .then( function(widget){
+                    $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + widget._id);
+                });
         }
 
         function createHeaderWidget(){
@@ -141,10 +154,6 @@
         model.searchPhotos = searchPhotos;
         model.selectPhoto = selectPhoto;
 
-        // (function init(){
-        //     model.searchText = {};
-        // })();
-
         function searchPhotos(searchTerm) {
 
             flickrService
@@ -160,12 +169,15 @@
         function selectPhoto(photo) {
             console.log(photo);         // TODO the console has the original object, now we can use the guts to recreate the URL...?
 
-            var url = "https://farm" +photo.farm + "staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+            var url = "https://farm" +photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
 
-        // var new widget object
+            var widget = { _id: model.wgid, widgetType: 'IMAGE', pageId: model.pid, url: url, width: '100%'}
 
-        // call widgetservice.update widget, then nagivate to the widget ID with $location
-
+        widgetService
+            .updateWidget(model.wgid, widget)
+            .then( function(){
+                $location.url('/user/' + model.uid + '/website/' + model.wid + '/page/' + model.pid + '/widget/' + model.wgid);
+            });
         }
 
     } //flickrImageSearchController
