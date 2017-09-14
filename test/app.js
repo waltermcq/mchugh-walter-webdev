@@ -1,5 +1,7 @@
-module.exports = function(app)
-{
+
+var app = require('../express');
+var q = require('q');
+
     app.get("/api/test", findAllMessages);
     app.post("/api/test", createMessage);
     app.delete("/api/test/:id", deleteMessage);
@@ -14,6 +16,7 @@ module.exports = function(app)
 
     var mongoose = require("mongoose");
     mongoose.connect(connectionString);
+    mongoose.Promise = q.Promise;
 
     var TestSchema = mongoose.Schema({
         message: String
@@ -59,4 +62,4 @@ module.exports = function(app)
                 }
             );
     }
-};
+
