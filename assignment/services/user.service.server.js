@@ -2,6 +2,7 @@
 // check piazza about this: "about endpoints in express"
 
 var app =  require('../../express');
+var userModel = require('../models/user/user.model.server.js');
 
 // endpoints
 app.post  ('/api/user/', createUser);
@@ -20,9 +21,14 @@ var users = [
 
 function createUser(req, res){
     var user = req.body;
-    user._id = (new Date()).getTime() + "";
-    users.push(user);
-    res.send(user);
+
+    userModel
+        .createUser(user)
+        .then( function(user){
+            res.send(user);
+        });
+    // user._id = (new Date()).getTime() + "";
+    // users.push(user);
 }
 
 function findUserById(req, res){
