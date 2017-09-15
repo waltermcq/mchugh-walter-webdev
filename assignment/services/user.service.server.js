@@ -33,50 +33,57 @@ function createUser(req, res){
 
 function findUserById(req, res){
     var userId = req.params['userId'];
-    var user = users.find(function (user) {
-        return user._id === userId;
-    });
-    res.send(user);
+
+    userModel
+        .findUserById(userId)
+        .then( function(user){
+            res.send(user);
+        })
 }
 
 function updateUser(req, res){  //userId, user
     var userId = req.params.userId;
     var user = req.body;
 
-    for(var u in users){
-        if(users[u]._id === userId){
-            users[u] = user;
-            res.sendStatus(200);  //update OK
-            return;
-        }
-    }
-    res.sendStatus(404);  //user not found
+    userModel
+        .updateUser(userId, user)
+        .then( function(status){
+                res.sendStatus(200);
+            },
+            function(error){
+                res.sendStatus(404);  //user not found
+            });
 }
 
 function deleteUser(req, res){
     var userId = req.params.userId;
-    var user = users.find( function(user){
-        return user._id === userId;
-    });
-    var index = users.indexOf(user);
-    users.splice(index, 1);
-    res.sendStatus(200);                //TODO ADD VALIDATION LIKE UPDATEUSER(); RETURN 404 if not found
+
+    userModel
+        .deleteUser(userId)
+        .then( function(status){
+            res.sendStatus(200);
+        },
+        function(error){
+            res.sendStatus(404);  //user not found
+        });
 }
 
 function findUserByCredentials(req, res){
     var username = req.query['username'];
     var password = req.query['password'];
 
-    for(var u in users) {
-        var user = users[u];
-        if(user.username === username &&
-            user.password === password) {
-            res.json(user);                       //like .send but specifically for JSON
-            return;
-        }
-    }
-    res.sendStatus (404);  //user not found
-
+    userModel
+        .findUserByCredentials(username, password)
+        .then( function(user){
+            if (user != null){
+                res.json(user);
+            }
+            else {
+                res.sendStatus(404);              // user not found
+            }
+        }, function(err){                         // system-wide error
+            res.sendStatus(404);
+        });
 }
 
 function findUserByUsername(req, res){
