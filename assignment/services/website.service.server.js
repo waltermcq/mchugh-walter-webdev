@@ -1,13 +1,12 @@
 
 var app =  require('../../express');
+var websiteModel = require('../models/website/website.model.server.js')
 
 app.post  ('/api/user/:userId/website', createWebsite);
 app.get   ('/api/user/:userId/website', findWebsitesByUser);
 app.get   ('/api/website/:websiteId', findWebsiteById);
 app.put   ('/api/website/:websiteId', updateWebsite);
 app.delete('/api/website/:websiteId', deleteWebsite);
-
-
 
 var websites = [
     { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
@@ -32,12 +31,17 @@ function findWebsitesByUser(req, res){
 }
 
 function createWebsite(req, res){
+
+    var userId = req.params['userId'];
     var website = req.body;
-    website._id = (new Date()).getTime() + "";
-    website.created = new Date();
-    website.updated = new Date();
-    websites.push(website);
-    res.send(website);
+
+    websiteModel.createWebsiteForUser(userId, website)
+        .then( function(website){
+            res.json(website);
+        },
+        function(err){
+            res.sendStatus(404);
+        });
 }
 
 function findWebsiteById(req, res){

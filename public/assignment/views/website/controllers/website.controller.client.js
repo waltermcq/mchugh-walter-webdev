@@ -45,11 +45,11 @@
         }
 
         function createWebsite(website){
-            website.developerId = model.uid;
+
             websiteService
-                .createWebsite(website)
-                .then( function(site){
-                    $location.url('/user/' + site.developerId + '/website');
+                .createWebsite(model.uid, website)
+                .then( function(website){
+                    $location.url('/user/' + model.uid + '/website');
                 });
 
         }
@@ -84,9 +84,8 @@
         })();
 
         function createWebsite(website){
-            website.developerId = model.uid;
             websiteService
-                .createWebsite(website)
+                .createWebsite(model.uid, website)
                 .then(function(){
                     $location.url('/user/' + model.uid + '/website');
                 });
