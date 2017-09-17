@@ -11,7 +11,7 @@ var userSchema = mongoose.Schema({
     websites:    [],       // user to site, site to user
     dateCreated: {type: Date, default: Date.now()}
 }
-// ,{collection: "user"}   //this hard-sets the collection name to override what is declared in user.model.server.js
+// ,{collection: "user"}   //this sets the collection name to override the declared name in user.model.server.js
 );
 
 module.exports = userSchema;  // make available if this file is require() 'd.
