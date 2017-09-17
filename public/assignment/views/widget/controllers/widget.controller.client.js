@@ -87,7 +87,8 @@
             });
         }
 
-        function getWidgetUrlForType(type) {  //TODO this executes before the init() sets the model widget.  fix.
+        function getWidgetUrlForType(widget) {  //TODO this executes before the init() sets the model widget and angular throws an error.
+            var type = widget.type;
             return 'views/widget/templates/widget-'+type.toLowerCase()+'-edit.view.client.html';
         }
     }
@@ -118,22 +119,22 @@
         }
 
         function createHeaderWidget(){
-            var headerWidget = {"_id": "", "widgetType":"HEADING", "pageId": model.pid, "size":2, "text":"Lorem"};
+            var headerWidget = {"type":"HEADING", "pageId": model.pid, "size":2, "text":"Lorem"};
             model.createWidget(headerWidget);
         }
 
         function createImageWidget(){
-            var imageWidget = {"_id": "", "widgetType":"IMAGE", "pageId": model.pid, "width":"100%", "url":"http://lorempixel.com/400/200/"};
+            var imageWidget = {"type":"IMAGE", "pageId": model.pid, "width":"100%", "url":"http://lorempixel.com/400/200/"};
             model.createWidget(imageWidget);
         }
 
         function createYouTubeWidget(){
-            var youTubeWidget = {"_id": "", "widgetType":"YOUTUBE", "pageId": model.pid, "width":"100%", "url": "https://youtu.be/AM2Ivdi9c4E"};
+            var youTubeWidget = {"type":"YOUTUBE", "pageId": model.pid, "width":"100%", "url": "https://youtu.be/AM2Ivdi9c4E"};
             model.createWidget(youTubeWidget);
         }
 
         function createHTMLWidget(){
-            var hTMLWidget = {"_id": "", "widgetType":"HTML", "pageId": model.pid, "text":"<p>Lorem ipsum</p>"};
+            var hTMLWidget = {"type":"HTML", "pageId": model.pid, "text":"<p>Lorem ipsum</p>"};
             model.createWidget(hTMLWidget);
         }
 

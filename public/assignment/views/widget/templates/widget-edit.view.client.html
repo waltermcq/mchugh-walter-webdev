@@ -20,7 +20,10 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div ng-include="model.getWidgetUrlForType(model.widget.widgetType)"></div>
+
+    <!--inject widget template content-->
+    <div ng-include="model.getWidgetUrlForType(model.widget)"></div>
+
     <div class="container-fluid">
         <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"
            class="btn btn-block btn-primary">Cancel</a>

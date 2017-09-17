@@ -30,7 +30,7 @@
         </div>
         <!--simpler but breaks HTML cert process, TODO implement-->
         <!--<div ng-include="model.getWidgetUrlForType(widget.widgetType)"></div>-->
-        <div  ng-switch="widget.widgetType">
+        <div  ng-switch="widget.type">
             <div ng-switch-when="HEADING">
                 <div ng-include="'views/widget/templates/widget-heading.view.client.html'"></div>
             </div>
