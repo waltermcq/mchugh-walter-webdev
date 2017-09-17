@@ -21,13 +21,12 @@ var websites = [
 function findWebsitesByUser(req, res){
 
     var userId = req.params.userId;
-    var resultSet = [];
-    for(var w in websites){
-        if(websites[w].developerId === userId){
-            resultSet.push(websites[w]);
-        }
-    }
-    res.json(resultSet);
+
+    websiteModel
+        .findAllWebsitesForUser(userId)
+        .then( function(websites){
+            res.json(websites);
+        });
 }
 
 function createWebsite(req, res){

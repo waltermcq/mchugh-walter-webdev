@@ -20,6 +20,9 @@ function createWebsiteForUser(userId, website){
 
 function findAllWebsitesForUser(userId){
 // Retrieves all website instances for user whose  _id is userId
+    return websiteModel.find({_user: userId})
+        .populate('_user')                                          // this gets the user object instead of just holding a reference
+        .exec();
 
 }
 

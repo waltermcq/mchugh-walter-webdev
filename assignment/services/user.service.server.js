@@ -79,9 +79,9 @@ function findUserByCredentials(req, res){
                 res.json(user);
             }
             else {
-                res.sendStatus(404);              // user not found
+                res.sendStatus(404);  // user not found
             }
-        }, function(err){                         // system-wide error
+        }, function(error){             // system-wide error
             res.sendStatus(404);
         });
 }
@@ -90,12 +90,16 @@ function findUserByUsername(req, res){
 
     var username = req.query['username'];
 
-    for(var u in users) {
-        var user = users[u];
-        if(user.username === username) {
-            res.send("1");
-            return;
-        }
-    }
-    res.send(username);  //user not found
+    userModel
+        .findUserByUsername(username)
+        .then( function(user){
+            if(user == null){
+                res.send(username);  // user not found, echo back username
+            }
+            else {
+                res.send('1');       // user exists
+            }
+        }, function(err){
+            res.sendStatus(404);     // system-wide error
+        });
 }
