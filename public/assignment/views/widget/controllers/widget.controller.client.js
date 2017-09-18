@@ -108,6 +108,7 @@
         model.createImageWidget   = createImageWidget;
         model.createYouTubeWidget = createYouTubeWidget;
         model.createHTMLWidget    = createHTMLWidget;
+        model.createTextWidget    = createTextWidget;
 
         function createWidget(widget){
             widget.pageId = model.pid;  //TODO do this in the widget client service
@@ -136,6 +137,11 @@
         function createHTMLWidget(){
             var hTMLWidget = {"type":"HTML", "pageId": model.pid, "text":"<p>Lorem ipsum</p>"};
             model.createWidget(hTMLWidget);
+        }
+
+        function createTextWidget(){
+            var textWidget = {"type":"TEXT", "pageId": model.pid, "text":"Lorem ipsum"};
+            model.createWidget(textWidget);
         }
 
     }

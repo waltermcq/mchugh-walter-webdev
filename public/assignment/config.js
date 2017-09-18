@@ -6,7 +6,7 @@
 
     function configuration($routeProvider) {
         $routeProvider
-            // default / user routing
+            // default and user routing
             .when('/', {
                 templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
@@ -88,7 +88,9 @@
                 controller: 'flickrImageSearchController',
                 controllerAs: 'model'
             })
-            //TODO ADD DEFAULT OR ELSE
+            .otherwise({
+                redirectTo: "/login"
+            });
     }
 
 })();

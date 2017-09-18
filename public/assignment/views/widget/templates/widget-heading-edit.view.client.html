@@ -13,13 +13,16 @@
            id="text"/>
 
     <label for="size">Size</label>
-    <select id="size" class="form-control">
-        <option>1 (X-Large)</option>
-        <option>2 (Larger)</option>
-        <option>3 (Large)</option>
-        <option>4 (Medium)</option>
-        <option>5 (Small)</option>
-        <option>6 (Smallest)</option>
+    <select ng-model="model.widget.size"
+            value="{{model.widget.size}}"
+            id="size"
+            class="form-control">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
     </select>
 </div>
 
