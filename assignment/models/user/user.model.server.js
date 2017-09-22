@@ -13,14 +13,12 @@ userModel.updateUser = updateUser;
 
 module.exports = userModel;         // the service layer can call userModel.createUser();
 
-// TODO IMPLEMENT
-function findUserByUsername(username){
-    return userModel.findOne({username: username});   //this is a pattern match, with mongo::find() underlying
-}
-
-
 function createUser(user){
     return userModel.create(user);   // this is async, so we return a promise (return);
+}
+
+function findUserByUsername(username){
+    return userModel.findOne({username: username});   //this is a pattern match, with mongo::find() underlying
 }
 
 function findUserById(userId){

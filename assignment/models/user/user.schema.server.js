@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
     lastName:    String,
     email:       String,
     phone:       String,
-    websites:    [],       // user to site, site to user
+    websites:    [{type: mongoose.Schema.Types.ObjectId, ref: "WebsiteModel"}],       // user to site, site to user
     dateCreated: {type: Date, default: Date.now()}
 }
 // ,{collection: "user"}   //this sets the collection name to override the declared name in user.model.server.js

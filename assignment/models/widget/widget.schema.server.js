@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var widgetSchema = mongoose.Schema({
-        _page:       {type: mongoose.Schema.ObjectId, ref: "PageModel"},     // enables mongo::populate
+        _page:       {type: mongoose.Schema.Types.ObjectId, ref: "PageModel"}, // enables mongo::populate
         name:        String,
         type:        {type: String, enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT']},
         text:        String,

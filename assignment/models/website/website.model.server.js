@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
 var websiteSchema = require('./website.schema.server.js');
-var websiteModel = mongoose.model('websiteModel', websiteSchema);  // UserModel must be unique across app; DB collection name
+var websiteModel = mongoose.model('WebsiteModel', websiteSchema);  // UserModel must be unique across app; DB collection name
 
 websiteModel.createWebsiteForUser = createWebsiteForUser;
 websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
@@ -22,9 +22,9 @@ function createWebsiteForUser(userId, website){
 function findAllWebsitesForUser(userId){
 // Retrieves all website instances for user whose  _id is userId
     return websiteModel
-        .find({_user: userId});                                        // "the closest thing Mongo has to a join"
-        // .populate('_user')                                          // this gets the user object instead of just holding a reference
-        // .exec();
+        .find({_user: userId})                                        // "the closest thing Mongo has to a join"
+        .populate("_user")                                          // this gets the user object instead of just holding a reference
+        .exec();
 
 }
 

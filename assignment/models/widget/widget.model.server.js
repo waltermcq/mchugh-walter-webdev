@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
 var widgetSchema = require('./widget.schema.server.js');
-var widgetModel = mongoose.model('widgetModel', widgetSchema);  // UserModel must be unique across app; DB collection name
+var widgetModel = mongoose.model('WidgetModel', widgetSchema);  // UserModel must be unique across app; DB collection name
 
 widgetModel.createWidget = createWidget;
 widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
@@ -19,7 +19,9 @@ function createWidget(pageId, widget){
 
 function findAllWidgetsForPage(pageId){
     return widgetModel
-        .find({_page: pageId});
+        .find({_page: pageId})
+        .populate("_page")                                          // this gets the user object instead of just holding a reference
+        .exec();
 }
 
 function findWidgetById(widgetId){

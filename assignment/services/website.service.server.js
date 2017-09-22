@@ -10,12 +10,15 @@ app.delete('/api/website/:websiteId', deleteWebsite);
 
 function findWebsitesByUser(req, res){
 
-    var userId = req.params.userId;
+    var userId = req.params['userId'];
 
     websiteModel
         .findAllWebsitesForUser(userId)
         .then( function(websites){
             res.json(websites);
+        },
+        function(error){
+            res.sendStatus(404);
         });
 }
 
