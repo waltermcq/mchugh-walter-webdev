@@ -1,5 +1,5 @@
-// utility by jannunzi
-// encapsulates express instance, lets us skip passing it around
+// j annunzi's express shortcut file
+
 const express = require('express');      // load express library
 const app = express();                   // instantiate instance of "app" and encapsulates
 app.express = express;
