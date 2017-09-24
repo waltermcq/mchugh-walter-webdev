@@ -1,14 +1,87 @@
 
-var app =  require('../../express');
+var app       = require('../../express');
 var userModel = require('../models/user/user.model.server.js');
+var passport  = require('passport');
+var auth      = authorized;
+
+var LocalStrategy = require('passport-local').Strategy;
+passport.use(new LocalStrategy(localStrategy));
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
+
 
 // endpoints
-app.post  ('/api/user/', createUser);
-app.get   ('/api/user/:userId', findUserById);
-app.get   ('/api/user', findUserByCredentials);
-app.get   ('/api/username', findUserByUsername);
-app.put   ('/api/user/:userId', updateUser);
-app.delete('/api/user/:userId', deleteUser);
+
+app.post  ('/api/login', passport.authenticate('local'), login);
+app.post  ('/api/logout',         logout);
+app.post  ('/api/register',       register);
+app.post  ('/api/user',     auth, createUser);
+app.get   ('/api/loggedin',       loggedin);
+app.get   ('/api/user',     auth, findAllUsers);
+app.put   ('/api/user/:id', auth, updateUser);
+app.delete('/api/user/:id', auth, deleteUser);
+
+// app.post  ('/api/user/', createUser);
+// app.get   ('/api/user/:userId', findUserById);
+// app.get   ('/api/user', findUserByCredentials);
+// app.get   ('/api/username', findUserByUsername);
+// app.put   ('/api/user/:userId', updateUser);
+// app.delete('/api/user/:userId', deleteUser);
+
+function localStrategy(username, password, done) {
+    userModel
+        .findUserByCredentials(username, password})
+        .then(
+            function(user) {
+                if (!user) {
+                    return done(null, false);
+                }
+                return done(null, user);           // store user in session
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        );
+}
+
+function authorized (req, res, next) {
+    if (!req.isAuthenticated()) {
+        res.send(401);
+    } else {
+        next();
+    }
+};
+
+function login(req, res) {
+    var user = req.user;
+    res.json(user);
+}
+
+function logout(req, res) {
+    req.logOut();
+    res.send(200);
+}
+
+function loggedin(req, res) {
+    res.send(req.isAuthenticated() ? req.user : '0');
+}
+
+function serializeUser(user, done) {
+    done(null, user);
+}
+
+function deserializeUser(user, done) {      // pull from cookie
+    userModel
+        .findUserById(user._id)
+        .then(
+            function(user){
+                done(null, user);
+            },
+            function(err){
+                done(err, null);
+            }
+        );
+}
 
 function createUser(req, res){
     var user = req.body;
