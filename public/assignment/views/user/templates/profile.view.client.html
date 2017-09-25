@@ -64,7 +64,7 @@
        href="#!/user/{{model.user._id}}/website">Websites</a>
 
     <a class="btn btn-primary btn-block"
-       href="#!/login">Logout</a>
+       ng-click="model.logOut()">Logout</a>
 
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteProfile(model.user)">Delete User</a>

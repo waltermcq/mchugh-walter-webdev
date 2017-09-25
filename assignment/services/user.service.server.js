@@ -13,7 +13,7 @@ passport.deserializeUser(deserializeUser);
 // endpoints
 
 app.post  ('/api/login', passport.authenticate('local'), login);
-// app.post  ('/api/logout',         logout);
+app.post  ('/api/logout',         logout);
 // app.post  ('/api/register',       register);
 // app.post  ('/api/user',     auth, createUser);
 app.get   ('/api/loggedin',       loggedin);
@@ -58,7 +58,7 @@ function login(req, res) {
 }
 
 function logout(req, res) {
-    req.logOut();
+    req.logOut();               // passport abstracted feature to clear session, invalidate cookie
     res.send(200);
 }
 

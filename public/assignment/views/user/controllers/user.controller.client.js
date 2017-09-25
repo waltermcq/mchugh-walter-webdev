@@ -77,24 +77,19 @@
                                userService,
                                currentUser) {
 
-        // data
         var model = this;
-        // model.uid = $routeParams['uid'];
         model.uid = currentUser._id;
-
+        // model.user = currentUser;
 
         model.updateProfile = updateProfile;
         model.deleteProfile = deleteProfile;
+        model.logOut = logOut;
 
         (function init(){
-
             renderUser(currentUser);
-            // userService
-            //     .findUserById(model.uid)         //return 'promise object'
-            //     .then(renderUser);
         })();
 
-        function renderUser(user){        //callback - when server provides response, run inner FUN
+        function renderUser(user){
             model.user = user;
         }
 
@@ -104,7 +99,6 @@
                 .then(function () {
                     model.message = "Profile updated successfully!";
                 });
-            // $location.url('/user/'+model.uid);
         }
 
         function deleteProfile(user) {
@@ -112,6 +106,14 @@
                 .deleteUser(user._id)
                 .then(function () {
                     $location.url('/login');  //TODO add failure branch
+                });
+        }
+
+        function logOut(){
+            userService
+                .logOut()
+                .then( function(){
+                    $location.url('/login');
                 });
         }
 
