@@ -21,16 +21,16 @@ app.get   ('/api/user',     auth, findAllUsers);
 app.put   ('/api/user/:id', auth, updateUser);
 app.delete('/api/user/:id', auth, deleteUser);
 
-// app.post  ('/api/user/', createUser);
-// app.get   ('/api/user/:userId', findUserById);
-// app.get   ('/api/user', findUserByCredentials);
-// app.get   ('/api/username', findUserByUsername);
-// app.put   ('/api/user/:userId', updateUser);
-// app.delete('/api/user/:userId', deleteUser);
+app.post  ('/api/user/', createUser);
+app.get   ('/api/user/:userId', findUserById);
+app.get   ('/api/user', findUserByCredentials);
+app.get   ('/api/username', findUserByUsername);
+app.put   ('/api/user/:userId', updateUser);
+app.delete('/api/user/:userId', deleteUser);
 
 function localStrategy(username, password, done) {
     userModel
-        .findUserByCredentials(username, password})
+        .findUserByCredentials(username, password)
         .then(
             function(user) {
                 if (!user) {
@@ -50,7 +50,7 @@ function authorized (req, res, next) {
     } else {
         next();
     }
-};
+}
 
 function login(req, res) {
     var user = req.user;
