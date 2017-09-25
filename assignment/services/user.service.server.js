@@ -13,13 +13,13 @@ passport.deserializeUser(deserializeUser);
 // endpoints
 
 app.post  ('/api/login', passport.authenticate('local'), login);
-app.post  ('/api/logout',         logout);
-app.post  ('/api/register',       register);
-app.post  ('/api/user',     auth, createUser);
+// app.post  ('/api/logout',         logout);
+// app.post  ('/api/register',       register);
+// app.post  ('/api/user',     auth, createUser);
 app.get   ('/api/loggedin',       loggedin);
-app.get   ('/api/user',     auth, findAllUsers);
-app.put   ('/api/user/:id', auth, updateUser);
-app.delete('/api/user/:id', auth, deleteUser);
+// app.get   ('/api/user',     auth, findAllUsers);
+// app.put   ('/api/user/:id', auth, updateUser);
+// app.delete('/api/user/:id', auth, deleteUser);
 
 app.post  ('/api/user/', createUser);
 app.get   ('/api/user/:userId', findUserById);

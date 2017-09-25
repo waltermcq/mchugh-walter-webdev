@@ -7,6 +7,7 @@
     function userService($http) {
 
         var api = {
+            login: login,
             findUserByCredentials: findUserbyCredentials,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
@@ -15,6 +16,19 @@
             deleteUser: deleteUser
         };
         return api;
+
+        function login(username, password){
+            var url = '/api/login';
+            var credentials = {
+                username: username,
+                password: password
+            };
+
+            return $http.post(url, credentials)   // url, then data
+                .then( function(response){
+                    return response.data;
+                });
+        }
 
         function createUser(user){
 

@@ -16,7 +16,8 @@
         function login(username, password) {
 
             userService
-                .findUserByCredentials(username, password)
+                .login(username, password)
+                // .findUserByCredentials(username, password)
                 .then(loginUser, loginError);                   // .then(success, failure)
 
             function loginError(user){ // TODO implement improved error message
