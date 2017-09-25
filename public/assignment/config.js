@@ -96,7 +96,7 @@
             });
     }
 
-    function checkLoggedIn(){
+    function checkLoggedIn(userService){
         return userService.checkLoggedIn();
     }
 
