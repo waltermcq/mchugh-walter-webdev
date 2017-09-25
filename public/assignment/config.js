@@ -27,7 +27,7 @@
                 controller: 'profileController',
                 controllerAs: 'model',
                 resolve: {
-                    currentUser: checkLoggedIn      // add more here
+                    currentUser: checkLoggedIn      // whatever checkLoggedIn returns (e.g. user) becomes an injectable object 'currentUser'
                 }
             })
             .when('/register', {

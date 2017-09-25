@@ -74,20 +74,24 @@
 
     function profileController($location,
                                $routeParams,
-                               userService) {
+                               userService,
+                               currentUser) {
 
         // data
         var model = this;
-        model.uid = $routeParams['uid'];
+        // model.uid = $routeParams['uid'];
+        model.uid = currentUser._id;
+
 
         model.updateProfile = updateProfile;
         model.deleteProfile = deleteProfile;
 
         (function init(){
 
-            userService
-                .findUserById(model.uid)         //return 'promise object'
-                .then(renderUser);
+            renderUser(currentUser);
+            // userService
+            //     .findUserById(model.uid)         //return 'promise object'
+            //     .then(renderUser);
         })();
 
         function renderUser(user){        //callback - when server provides response, run inner FUN
