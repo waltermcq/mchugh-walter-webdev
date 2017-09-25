@@ -64,7 +64,7 @@ function logout(req, res) {
 
 function loggedin(req, res) {          // as long as user is logged in, user is available in req
 
-    if(res.isAuthenticated()){
+    if(req.isAuthenticated()){
         res.json(req.user);
     } else{
         res.send('0');
