@@ -22,10 +22,13 @@
                 controller: 'loginController',
                 controllerAs: 'vm'
             })
-            .when('/user/:uid', {
+            .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn      // add more here
+                }
             })
             .when('/register', {
                 templateUrl: 'views/user/templates/register.view.client.html',
@@ -91,6 +94,10 @@
             .otherwise({
                 redirectTo: "/login"
             });
+    }
+
+    function checkLoggedIn(){
+        return userService.checkLoggedIn();
     }
 
 })();

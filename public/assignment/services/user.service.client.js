@@ -8,6 +8,7 @@
 
         var api = {
             login: login,
+            checkLoggedIn: checkLoggedIn,
             findUserByCredentials: findUserbyCredentials,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
@@ -25,6 +26,15 @@
             };
 
             return $http.post(url, credentials)   // url, then data
+                .then( function(response){
+                    return response.data;
+                });
+        }
+
+        function checkLoggedIn(){
+            var url = '/api/loggedin';
+
+            return $http.get(url)
                 .then( function(response){
                     return response.data;
                 });

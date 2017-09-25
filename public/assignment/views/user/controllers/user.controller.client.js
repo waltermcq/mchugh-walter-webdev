@@ -27,7 +27,7 @@
 
         function loginUser(user){
             if(user !== null) {
-                $location.url('/user/' + user._id);
+                $location.url('/profile');
             }
             else {model.message = "Something went wrong!"
             }

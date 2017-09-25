@@ -62,8 +62,13 @@ function logout(req, res) {
     res.send(200);
 }
 
-function loggedin(req, res) {
-    res.send(req.isAuthenticated() ? req.user : '0');
+function loggedin(req, res) {          // as long as user is logged in, user is available in req
+
+    if(res.isAuthenticated()){
+        res.json(req.user);
+    } else{
+        res.send('0');
+    }
 }
 
 function serializeUser(user, done) {
