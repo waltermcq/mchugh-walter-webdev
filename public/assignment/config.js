@@ -35,6 +35,12 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/admin.view.client.html'
+                // ,
+                // controller: 'adminController',
+                // controllerAs: 'model'
+            })
 
             // website routing
             .when('/user/:uid/website', {
@@ -96,12 +102,11 @@
             });
     }
 
-    function checkLoggedIn($q, $location, userService){
+    function checkLoggedIn($q, $location, userService){  // $timeout, $http, $rootScope
         var deferred = $q.defer();
         userService
             .checkLoggedIn()
             .then( function(currentUser){
-                // var currentUser = response.data;
                 if(currentUser === '0'){
                     deferred.reject();
                     $location.url('/login');
@@ -110,8 +115,6 @@
                 }
             });
         return deferred.promise;
-
-
     }
 
 })();

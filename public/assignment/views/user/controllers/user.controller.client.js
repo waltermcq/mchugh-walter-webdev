@@ -63,9 +63,9 @@
                             password: password
                         };
                         userService
-                            .createUser(user)
-                            .then( function(user) {
-                                $location.url('/user/' + user._id)
+                            .register(user)
+                            .then( function() {
+                                $location.url('/profile');
                             });
                     }
                 });

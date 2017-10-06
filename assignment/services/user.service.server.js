@@ -14,7 +14,7 @@ passport.deserializeUser(deserializeUser);
 
 app.post  ('/api/login', passport.authenticate('local'), login);
 app.post  ('/api/logout',         logout);
-// app.post  ('/api/register',       register);
+app.post  ('/api/register',       register);
 // app.post  ('/api/user',     auth, createUser);
 app.get   ('/api/loggedin',       loggedin);
 // app.get   ('/api/user',     auth, findAllUsers);
@@ -86,6 +86,18 @@ function deserializeUser(user, done) {      // pull from cookie
                 done(err, null);
             }
         );
+}
+
+function register(req, res){
+    var user = req.body;
+
+    userModel
+        .createUser(user)
+        .then( function(user){
+            req.login(user, function(status){  // notify passport - add to session, new cookie
+                res.json(user);
+            });
+        });
 }
 
 function createUser(req, res){

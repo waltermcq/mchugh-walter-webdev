@@ -10,6 +10,7 @@
             login: login,
             checkLoggedIn: checkLoggedIn,
             logOut: logOut,
+            register: register,
             findUserByCredentials: findUserbyCredentials,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
@@ -45,6 +46,14 @@
             var url = '/api/logout';
 
             return $http.post(url)
+                .then( function(response){
+                    return response.data;
+                });
+        }
+
+        function register(user){
+            var url = '/api/register';
+            return $http.post(url, user)   // url, then data
                 .then( function(response){
                     return response.data;
                 });
