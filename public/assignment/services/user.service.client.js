@@ -9,6 +9,7 @@
         var api = {
             login: login,
             checkLoggedIn: checkLoggedIn,
+            checkAdmin: checkAdmin,
             logOut: logOut,
             register: register,
             findUserByCredentials: findUserbyCredentials,
@@ -35,6 +36,15 @@
 
         function checkLoggedIn(){
             var url = '/api/loggedin';
+
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;
+                });
+        }
+
+        function checkAdmin(){
+            var url = '/api/admin';
 
             return $http.get(url)
                 .then( function(response){

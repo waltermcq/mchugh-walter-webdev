@@ -13,18 +13,19 @@ passport.deserializeUser(deserializeUser);
 // endpoints
 
 app.post  ('/api/login', passport.authenticate('local'), login);
-app.post  ('/api/logout',         logout);
-app.post  ('/api/register',       register);
-// app.post  ('/api/user',     auth, createUser);
-app.get   ('/api/loggedin',       loggedin);
-// app.get   ('/api/user',     auth, findAllUsers);
-// app.put   ('/api/user/:id', auth, updateUser);
-// app.delete('/api/user/:id', auth, deleteUser);
+app.post  ('/api/logout',       logout);
+app.post  ('/api/register',     register);
+// app.post  ('/api/user',      auth, createUser);
+app.get   ('/api/loggedin',     loggedin);
+app.get   ('/api/admin',        checkAdmin);
+// app.get   ('/api/user',      auth, findAllUsers);
+// app.put   ('/api/user/:id',  auth, updateUser);
+// app.delete('/api/user/:id',  auth, deleteUser);
 
-app.post  ('/api/user/', createUser);
+app.post  ('/api/user/',        createUser);
 app.get   ('/api/user/:userId', findUserById);
-app.get   ('/api/user', findUserByCredentials);
-app.get   ('/api/username', findUserByUsername);
+app.get   ('/api/user',         findUserByCredentials);
+app.get   ('/api/username',     findUserByUsername);
 app.put   ('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
 
@@ -67,6 +68,15 @@ function loggedin(req, res) {          // as long as user is logged in, user is 
     if(req.isAuthenticated()){
         res.json(req.user);
     } else{
+        res.send('0');
+    }
+}
+
+function checkAdmin(req, res) {          // as long as user is logged in, user is available in req
+
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1){
+        res.json(req.user);
+    } else {
         res.send('0');
     }
 }
