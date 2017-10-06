@@ -73,13 +73,12 @@
     } //registerController
 
     function profileController($location,
-                               $routeParams,
+                               // $routeParams,
                                userService,
                                currentUser) {
 
         var model = this;
         model.uid = currentUser._id;
-        // model.user = currentUser;
 
         model.updateProfile = updateProfile;
         model.deleteProfile = deleteProfile;
