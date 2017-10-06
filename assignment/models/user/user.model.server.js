@@ -14,6 +14,7 @@ userModel.updateUser = updateUser;
 module.exports = userModel;         // the service layer can call userModel.createUser();
 
 function createUser(user){
+    user.roles = ["USER"];
     return userModel.create(user);   // this is async, so we return a promise (return);
 }
 

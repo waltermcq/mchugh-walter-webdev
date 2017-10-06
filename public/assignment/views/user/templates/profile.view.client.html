@@ -63,9 +63,9 @@
     <a class="btn btn-success btn-block"
        href="#!/user/{{model.user._id}}/website">Websites</a>
 
-    <!--<a ng-if="model.user._id)"-->
-       <!--class="btn btn-success btn-block"-->
-       <!--href="#!/admin">Site Administration</a>-->
+    <a ng-if="model.user.roles.indexOf('ADMIN') > -1 "
+       class="btn btn-success btn-block"
+       href="#!/admin">Site Administration</a>
 
     <a class="btn btn-primary btn-block"
        ng-click="model.logOut()">Logout</a>
