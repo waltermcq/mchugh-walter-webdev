@@ -36,10 +36,12 @@
                 controllerAs: 'model'
             })
             .when('/admin', {
-                templateUrl: 'views/admin/templates/admin.view.client.html'
-                // ,
+                templateUrl: 'views/admin/templates/admin.view.client.html',
                 // controller: 'adminController',
                 // controllerAs: 'model'
+                resolve: {
+                    currentUser: checkAdmin
+                }
             })
 
             // website routing
@@ -110,6 +112,21 @@
                 if(currentUser === '0'){
                     deferred.reject();
                     $location.url('/login');
+                } else {
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function checkAdmin($q, $location, userService){  // $timeout, $http, $rootScope
+        var deferred = $q.defer();
+        userService
+            .checkAdmin()
+            .then( function(currentUser){
+                if(currentUser === '0'){
+                    deferred.resolve({});
+                    $location.url('/login')
                 } else {
                     deferred.resolve(currentUser);
                 }
