@@ -11,7 +11,7 @@
                 Administration
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateProfile(model.user)">
+                <a>
                     <span class="glyphicon glyphicon-ok pull-right"></span>
                 </a>
             </p>
@@ -44,49 +44,8 @@
         <!--</li>-->
     </ul>
 
-    <form>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text"
-                   class="form-control"
-                   id="username"
-                   readonly
-                   ng-model="model.user.username">
-
-
-            <label for="email">Email address</label>
-            <input type="email"
-                   class="form-control"
-                   id="email"
-                   ng-model="model.user.email">
-
-
-            <label for="first-name">First Name</label>
-            <input type="text"
-                   class="form-control"
-                   id="first-name"
-                   ng-model="model.user.firstName">
-
-
-            <label for="last-name">Last Name</label>
-            <input type="text"
-                   class="form-control"
-                   id="last-name"
-                   ng-model="model.user.lastName">
-        </div>
-    </form>
-
-    <a class="btn btn-success btn-block"
-       href="#!/user/{{model.user._id}}/website">Websites</a>
-
-    <a class="btn btn-success btn-block"
-       href="#!/user/{{model.user._id}}/website">Websites</a>
-
     <a class="btn btn-primary btn-block"
        ng-click="model.logOut()">Logout</a>
-
-    <a class="btn btn-danger btn-block"
-       ng-click="model.deleteProfile(model.user)">Delete User</a>
 
 </div>
 

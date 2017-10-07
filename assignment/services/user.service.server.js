@@ -9,7 +9,6 @@ passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-
 // endpoints
 
 app.post  ('/api/login', passport.authenticate('local'), login);

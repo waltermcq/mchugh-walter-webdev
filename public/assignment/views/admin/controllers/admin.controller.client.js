@@ -4,16 +4,17 @@
         .module('WebAppMaker')
         .controller('adminUserController', adminUserController);
 
-    function adminUserController(UserService){
+    function adminUserController(userService){
         var model = this;
 
         (function init(){
 
             userService
-                .findall()
+                .findAllUsers()
                 .then( function(users){
                     model.users = users;
                 })
         })();
-    }
+    } //adminUser
+
 })();
