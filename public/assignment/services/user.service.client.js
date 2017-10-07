@@ -15,6 +15,7 @@
             findUserByCredentials: findUserbyCredentials,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
+            findAllUsers: findAllUsers,
             createUser: createUser,
             updateUser: updateUser,
             deleteUser: deleteUser
@@ -97,6 +98,15 @@
 
         function findUserbyCredentials(username, password) {
             var url = '/api/user/?username=' + username + "&password=" + password;
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;
+                });
+        }
+
+        function findAllUsers() {
+            var url = '/api/user';
+
             return $http.get(url)
                 .then( function(response){
                     return response.data;

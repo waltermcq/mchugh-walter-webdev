@@ -8,7 +8,7 @@
                 </a>
             </p>
             <a class="navbar-brand" href="#!/admin">
-                Administration
+                User Administration
             </a>
             <p class="navbar-text pull-right">
                 <a ng-click="model.updateProfile(model.user)">
@@ -27,21 +27,11 @@
     </div>
 
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="#!/admin/admin">Administrators</a>
+        <li ng-repeat="user in model.users"
+            class="list-group-item">
+            {{user}}
         </li>
-        <li class="list-group-item">
-            <a href="#!/admin/user">Users</a>
-        </li>
-        <!--<li class="list-group-item">-->
-            <!--<a href="#!/admin/user">Websites</a>-->
-        <!--</li>-->
-        <!--<li class="list-group-item">-->
-            <!--<a href="#!/admin/user">Pages</a>-->
-        <!--</li>-->
-        <!--<li class="list-group-item">-->
-            <!--<a href="#!/admin/user">Widgets</a>-->
-        <!--</li>-->
+
     </ul>
 
     <form>

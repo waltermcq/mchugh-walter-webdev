@@ -1,15 +1,15 @@
 
-
 var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server.js');
 var userModel = mongoose.model('UserModel', userSchema);  // UserModel must be unique across app; DB collection name
 
-userModel.createUser = createUser;
-userModel.findUserById = findUserById;
+userModel.createUser            = createUser;
+userModel.findUserById          = findUserById;
 userModel.findUserByCredentials = findUserByCredentials;
-userModel.findUserByUsername = findUserByUsername;
-userModel.deleteUser = deleteUser;
-userModel.updateUser = updateUser;
+userModel.findUserByUsername    = findUserByUsername;
+userModel.findAllUsers          = findAllUsers;
+userModel.deleteUser            = deleteUser;
+userModel.updateUser            = updateUser;
 
 module.exports = userModel;         // the service layer can call userModel.createUser();
 
@@ -28,6 +28,10 @@ function findUserById(userId){
 
 function findUserByCredentials(username, password){
     return userModel.findOne({username: username, password: password});   //this is a pattern match, with mongo::find() underlying
+}
+
+function findAllUsers() {
+    return userModel.find();
 }
 
 function deleteUser(userId){

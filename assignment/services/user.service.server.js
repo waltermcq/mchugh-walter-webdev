@@ -18,13 +18,13 @@ app.post  ('/api/register',     register);
 // app.post  ('/api/user',      auth, createUser);
 app.get   ('/api/loggedin',     loggedin);
 app.get   ('/api/admin',        checkAdmin);
-// app.get   ('/api/user',      auth, findAllUsers);
+app.get   ('/api/user',   auth, findAllUsers);
 // app.put   ('/api/user/:id',  auth, updateUser);
 // app.delete('/api/user/:id',  auth, deleteUser);
 
 app.post  ('/api/user/',        createUser);
 app.get   ('/api/user/:userId', findUserById);
-app.get   ('/api/user',         findUserByCredentials);
+// app.get   ('/api/user',         findUserByCredentials);
 app.get   ('/api/username',     findUserByUsername);
 app.put   ('/api/user/:userId', updateUser);
 app.delete('/api/user/:userId', deleteUser);
@@ -45,7 +45,7 @@ function localStrategy(username, password, done) {
         );
 }
 
-function authorized (req, res, next) {
+function authorized(req, res, next) {
     if (!req.isAuthenticated()) {
         res.send(401);
     } else {
@@ -155,6 +155,25 @@ function deleteUser(req, res){
         function(error){
             res.sendStatus(404);
         });
+}
+
+function findAllUsers(req, res) {
+    var username = req.query['username'];
+    var password = req.query['password'];
+
+    if(username && password) {
+        return findUserByCredentials(req, res);
+    }
+
+    return userModel
+        .findAllUsers()
+        .then( function(users) {
+            res.json(users);
+        },
+        function(error) {
+           res.sendStatus(404);
+        });
+
 }
 
 function findUserByCredentials(req, res){

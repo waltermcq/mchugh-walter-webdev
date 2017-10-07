@@ -35,10 +35,20 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+
+            // administrator
             .when('/admin', {
                 templateUrl: 'views/admin/templates/admin.view.client.html',
-                // controller: 'adminController',
-                // controllerAs: 'model'
+                controller: 'adminController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/users', {
+                templateUrl: 'views/admin/templates/admin-user.view.client.html',
+                controller: 'adminUserController',
+                controllerAs: 'model',
                 resolve: {
                     currentUser: checkAdmin
                 }
