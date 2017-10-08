@@ -28,7 +28,8 @@ app.get   ('/api/user/:userId', findUserById);
 // app.get   ('/api/user',         findUserByCredentials);
 app.get   ('/api/username',     findUserByUsername);
 app.put   ('/api/user/:userId', updateUser);
-app.delete('/api/user/:userId', deleteUser);
+app.delete('/api/user/:userId', isAdmin, deleteUser);
+app.delete('/api/unregister', unregister);
 
 function localStrategy(username, password, done) {
     userModel
@@ -117,6 +118,16 @@ function register(req, res){
                 res.json(user);
             });
         });
+}
+
+function unregister(req, res) {
+    userModel
+        .deleteUser(req.user._id)
+        .then( function(status) {
+            req.user.logout();
+            res.sendStatus(200);
+        });
+
 }
 
 function createUser(req, res){

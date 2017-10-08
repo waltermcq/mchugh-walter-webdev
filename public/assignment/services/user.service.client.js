@@ -18,7 +18,8 @@
             findAllUsers: findAllUsers,
             createUser: createUser,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            unregister: unregister
         };
         return api;
 
@@ -123,6 +124,14 @@
 
         function deleteUser(userId){
             var url = '/api/user/' + userId;
+            return $http.delete(url)
+                .then( function(response){
+                    return response.data;
+                });
+        }
+
+        function unregister(){
+            var url = '/api/unregister';
             return $http.delete(url)
                 .then( function(response){
                     return response.data;

@@ -81,7 +81,7 @@
         model.uid = currentUser._id;
 
         model.updateProfile = updateProfile;
-        model.deleteProfile = deleteProfile;
+        model.unregister = unregister;
         model.logOut = logOut;
 
         (function init(){
@@ -100,12 +100,15 @@
                 });
         }
 
-        function deleteProfile(user) {
+        function unregister() {
             userService
-                .deleteUser(user._id)
-                .then(function () {
-                    $location.url('/login');  //TODO add failure branch
-                });
+                .unregister();
+            $location.url('/login');
+                // .then(function () {
+                //     $location.url('/login');  //TODO add failure branch
+                // }, function(error) {
+                //     model.message = "Profile unregister error!";
+                // });
         }
 
         function logOut(){
