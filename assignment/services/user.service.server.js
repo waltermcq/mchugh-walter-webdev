@@ -18,7 +18,8 @@ app.post  ('/api/register',     register);
 // app.post  ('/api/user',      auth, createUser);
 app.get   ('/api/loggedin',     loggedin);
 app.get   ('/api/admin',        checkAdmin);
-app.get   ('/api/user',   auth, findAllUsers);
+// app.get   ('/api/user',   auth, findAllUsers);
+app.get   ('/api/user',   isAdmin, findAllUsers);
 // app.put   ('/api/user/:id',  auth, updateUser);
 // app.delete('/api/user/:id',  auth, deleteUser);
 
@@ -78,6 +79,14 @@ function checkAdmin(req, res) {          // as long as user is logged in, user i
         res.json(req.user);
     } else {
         res.send('0');
+    }
+}
+
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1){
+        next();
+    } else {
+        res.sendStatus(401);  // unauthorized
     }
 }
 
