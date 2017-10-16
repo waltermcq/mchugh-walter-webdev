@@ -8,8 +8,10 @@ userModel.findUserById          = findUserById;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserByUsername    = findUserByUsername;
 userModel.findAllUsers          = findAllUsers;
+userModel.findUserByGoogleId    = findUserByGoogleId;
 userModel.deleteUser            = deleteUser;
 userModel.updateUser            = updateUser;
+
 
 module.exports = userModel;         // the service layer can call userModel.createUser();
 
@@ -32,6 +34,10 @@ function findUserByCredentials(username, password){
 
 function findAllUsers() {
     return userModel.find();
+}
+
+function findUserByGoogleId(googleId) {
+    return userModel.findOne({'google.id': googleId})
 }
 
 function deleteUser(userId){
