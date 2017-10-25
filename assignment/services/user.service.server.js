@@ -189,6 +189,7 @@ function deserializeUser(user, done) {      // pull from cookie
 
 function register(req, res){
     var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
 
     userModel
         .createUser(user)
