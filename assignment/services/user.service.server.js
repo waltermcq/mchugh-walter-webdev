@@ -13,6 +13,12 @@ var googleConfig = {
     callbackURL  : process.env.GOOGLE_CALLBACK_URL
 };
 
+// var googleConfig = {
+//     clientID     : '**CLIENT-ID**',
+//     clientSecret : '**SECRET**',
+//     callbackURL  : '**CALLBACK**'
+// };
+
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
@@ -43,46 +49,45 @@ app.get   ('/auth/google', passport.authenticate('google', { scope : ['profile',
 
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: '/#/profile',
-        failureRedirect: '/#/login'
+        successRedirect: '/assignment/index.html#!/profile',
+        failureRedirect: '/assignment/index.html#!/login'
     }));
 
 function googleStrategy(token, refreshToken, profile, done) {
-    console.log(profile);
-    // userModel
-    //     .findUserByGoogleId(profile.id)
-    //     .then(
-    //         function(user) {
-    //             if(user) {
-    //                 return done(null, user);
-    //             } else {
-    //                 var email = profile.emails[0].value;
-    //                 var emailParts = email.split("@");
-    //                 var newGoogleUser = {
-    //                     username:  emailParts[0],
-    //                     firstName: profile.name.givenName,
-    //                     lastName:  profile.name.familyName,
-    //                     email:     email,
-    //                     google: {
-    //                         id:    profile.id,
-    //                         token: token
-    //                     }
-    //                 };
-    //                 return userModel.createUser(newGoogleUser);
-    //             }
-    //         },
-    //         function(err) {
-    //             if (err) { return done(err); }
-    //         }
-    //     )
-    //     .then(
-    //         function(user){
-    //             return done(null, user);
-    //         },
-    //         function(err){
-    //             if (err) { return done(err); }
-    //         }
-    //     );
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);          // set as currently logged-in user
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+                        google: {
+                            id:    profile.id,
+                            token: token                //can be used in other apps, avoid re-authentication
+                        }
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
 }
 
 
