@@ -20,6 +20,7 @@ var googleConfig = {
 // };
 
 
+var bcrypt = require("bcrypt-nodejs");
 
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 passport.use(new LocalStrategy(localStrategy));
@@ -95,14 +96,29 @@ function googleStrategy(token, refreshToken, profile, done) {
 
 
 function localStrategy(username, password, done) {
+    // userModel
+    //     .findUserByCredentials(username, password)
+    //     .then(
+    //         function(user) {
+    //             if (!user) {
+    //                 return done(null, false);
+    //             }
+    //             return done(null, user);           // store user in session
+    //         },
+    //         function(err) {
+    //             if (err) { return done(err); }
+    //         }
+    //     );
+
     userModel
         .findUserByCredentials(username, password)
         .then(
             function(user) {
-                if (!user) {
+                if(user.username === username && user.password === password) {
+                    return done(null, user);
+                } else {
                     return done(null, false);
                 }
-                return done(null, user);           // store user in session
             },
             function(err) {
                 if (err) { return done(err); }
