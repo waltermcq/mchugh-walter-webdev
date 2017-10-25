@@ -19,6 +19,8 @@ var googleConfig = {
 //     callbackURL  : '**CALLBACK**'
 // };
 
+
+
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
