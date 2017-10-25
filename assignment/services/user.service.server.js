@@ -48,41 +48,43 @@ app.get('/auth/google/callback',
     }));
 
 function googleStrategy(token, refreshToken, profile, done) {
-    userModel
-        .findUserByGoogleId(profile.id)
-        .then(
-            function(user) {
-                if(user) {
-                    return done(null, user);
-                } else {
-                    var email = profile.emails[0].value;
-                    var emailParts = email.split("@");
-                    var newGoogleUser = {
-                        username:  emailParts[0],
-                        firstName: profile.name.givenName,
-                        lastName:  profile.name.familyName,
-                        email:     email,
-                        google: {
-                            id:    profile.id,
-                            token: token
-                        }
-                    };
-                    return userModel.createUser(newGoogleUser);
-                }
-            },
-            function(err) {
-                if (err) { return done(err); }
-            }
-        )
-        .then(
-            function(user){
-                return done(null, user);
-            },
-            function(err){
-                if (err) { return done(err); }
-            }
-        );
+    console.log(profile);
+    // userModel
+    //     .findUserByGoogleId(profile.id)
+    //     .then(
+    //         function(user) {
+    //             if(user) {
+    //                 return done(null, user);
+    //             } else {
+    //                 var email = profile.emails[0].value;
+    //                 var emailParts = email.split("@");
+    //                 var newGoogleUser = {
+    //                     username:  emailParts[0],
+    //                     firstName: profile.name.givenName,
+    //                     lastName:  profile.name.familyName,
+    //                     email:     email,
+    //                     google: {
+    //                         id:    profile.id,
+    //                         token: token
+    //                     }
+    //                 };
+    //                 return userModel.createUser(newGoogleUser);
+    //             }
+    //         },
+    //         function(err) {
+    //             if (err) { return done(err); }
+    //         }
+    //     )
+    //     .then(
+    //         function(user){
+    //             return done(null, user);
+    //         },
+    //         function(err){
+    //             if (err) { return done(err); }
+    //         }
+    //     );
 }
+
 
 
 function localStrategy(username, password, done) {
