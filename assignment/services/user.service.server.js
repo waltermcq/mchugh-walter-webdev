@@ -1,6 +1,7 @@
 
 var app       = require('../../express');
 var userModel = require('../models/user/user.model.server.js');
+var session   = require('express-session');
 var passport  = require('passport');
 var auth      = authorized;
 
@@ -96,34 +97,36 @@ function googleStrategy(token, refreshToken, profile, done) {
 
 
 function localStrategy(username, password, done) {
-    // userModel
-    //     .findUserByCredentials(username, password)
-    //     .then(
-    //         function(user) {
-    //             if (!user) {
-    //                 return done(null, false);
-    //             }
-    //             return done(null, user);           // store user in session
-    //         },
-    //         function(err) {
-    //             if (err) { return done(err); }
-    //         }
-    //     );
-
     userModel
         .findUserByCredentials(username, password)
         .then(
             function(user) {
-                if(user.username === username && user.password === password) {
-                    return done(null, user);
-                } else {
+                if (!user) {
                     return done(null, false);
                 }
+                return done(null, user);           // store user in session
             },
             function(err) {
                 if (err) { return done(err); }
             }
         );
+
+    // userModel
+    //     .findUserByCredentials(username, password)
+    //     .then(
+    //         function(user) {
+    //             if(user && bcrypt.compareSync(password, user.password)) {
+    //                 return done(null, user);
+    //             } else {
+    //                 return done(null, false);
+    //             }
+    //         },
+    //         function(err) {
+    //             if (err) {
+    //                 return done(err);
+    //             }
+    //         }
+    //     );
 }
 
 function authorized(req, res, next) {
@@ -193,11 +196,25 @@ function register(req, res){
 
     userModel
         .createUser(user)
-        .then( function(user){
-            req.login(user, function(status){  // notify passport - add to session, new cookie
-                res.json(user);
-            });
-        });
+        .then(
+            function(user){
+                if(user){
+                    req.login(user, function(err) {
+                        if(err) {
+                            res.status(400).send(err);
+                        } else {
+                            res.json(user);
+                        }
+                    });
+                }
+            }
+        );
+
+    // .then( function(user){
+        //     req.login(user, function(status){  // notify passport - add to session, new cookie
+        //         res.json(user);
+        //     });
+        // });
 }
 
 function unregister(req, res) {

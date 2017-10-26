@@ -131,7 +131,7 @@
         }
 
         function unregister(){
-            var url = '/api/unregister';
+            var url = '/api/unregister  ';
             return $http.delete(url)
                 .then( function(response){
                     return response.data;

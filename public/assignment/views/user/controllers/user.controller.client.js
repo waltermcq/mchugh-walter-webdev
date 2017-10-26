@@ -35,7 +35,8 @@
     }  //loginController
 
     function registerController($location,
-                                userService) {
+                                userService,
+                                $rootScope) {
 
         var model = this;
 
@@ -65,6 +66,8 @@
                         userService
                             .register(user)
                             .then( function() {
+                                var user = response.data;
+                                $rootScope.currentUser = user;  // this breaks pw1 = pw2 for some weird reason
                                 $location.url('/profile');
                             });
                     }
