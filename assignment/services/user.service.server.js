@@ -8,16 +8,10 @@ var auth      = authorized;
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-var googleConfig = {
-    clientID     : process.env.GOOGLE_CLIENT_ID,
-    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL  : process.env.GOOGLE_CALLBACK_URL
-};
-
 // var googleConfig = {
-//     clientID     : '**CLIENT-ID**',
-//     clientSecret : '**SECRET**',
-//     callbackURL  : '**CALLBACK**'
+//     clientID     : process.env.GOOGLE_CLIENT_ID,
+//     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+//     callbackURL  : process.env.GOOGLE_CALLBACK_URL
 // };
 
 
@@ -98,35 +92,21 @@ function googleStrategy(token, refreshToken, profile, done) {
 
 function localStrategy(username, password, done) {
     userModel
-        .findUserByCredentials(username, password)
+        .findUserByUsername(username)
         .then(
             function(user) {
-                if (!user) {
+                if(user && bcrypt.compareSync(password, user.password)) {
+                    return done(null, user);
+                } else {
                     return done(null, false);
                 }
-                return done(null, user);           // store user in session
             },
             function(err) {
-                if (err) { return done(err); }
+                if (err) {
+                    return done(err);
+                }
             }
         );
-
-    // userModel
-    //     .findUserByCredentials(username, password)
-    //     .then(
-    //         function(user) {
-    //             if(user && bcrypt.compareSync(password, user.password)) {
-    //                 return done(null, user);
-    //             } else {
-    //                 return done(null, false);
-    //             }
-    //         },
-    //         function(err) {
-    //             if (err) {
-    //                 return done(err);
-    //             }
-    //         }
-    //     );
 }
 
 function authorized(req, res, next) {
