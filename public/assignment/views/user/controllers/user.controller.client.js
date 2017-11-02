@@ -17,11 +17,10 @@
 
             userService
                 .login(username, password)
-                // .findUserByCredentials(username, password)
                 .then(loginUser, loginError);                   // .then(success, failure)
 
-            function loginError(user){ // TODO implement improved error message
-                model.message = "Username " + username + " not found";
+            function loginError(user){ //
+                model.message = "Username " + username + " not found or password incorrect!";
             }
         }
 
@@ -29,7 +28,7 @@
             if(user !== null) {
                 $location.url('/profile');
             }
-            else {model.message = "Something went wrong!"
+            else { model.message = "Something went wrong!"
             }
         } //loginUser
     }  //loginController
