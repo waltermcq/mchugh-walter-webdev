@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pocApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Proof of Concept: Zomato API / Restaurant App</title>
+
+    <script src="../../assignment/vendor/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <link href="../../assignment/css/bootstrap.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <div class="container-fluid"
+         ng-controller="pocAppController as model">
+        <h1>
+            Proof of Concept: Zomato API
+        </h1>
+        <div class="row">
+            <div class="col-xs-6">
+                <h2>Search for Restaurants in Metro Boston</h2>
+                <input ng-model="model.searchText"
+                       class="form-control"
+                        placeholder="thai">
+                <button ng-click="model.search(model.searchText)"
+                        class="btn btn-primary btn-block">
+                    Find Restaurants</button>
+                <h2> Search Results</h2>
+
+                <ul class="list-group">
+                    <li ng-repeat="restaurant in model.restaurants"
+                        ng-click="model.getDetails(restaurant.restaurant.id)"
+                        class="list-group-item">
+                        <h5>{{restaurant.restaurant.name}}</h5>
+                        <h5>{{restaurant.restaurant.location.locality}}</h5>
+                        <h5>Cuisine: {{restaurant.restaurant.cuisines}}</h5>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-xs-6">
+                <h2>Resturant Details</h2>
+                    <img ng-src="{{model.restDetail.thumb}}" width="200px">
+                    <h5>{{model.restDetail.name}}</h5>
+                    <h5>{{model.restDetail.location.address}}</h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
