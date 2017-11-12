@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="FoodEngine">
 <head>
+
     <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <title>Find Tasty Things in Boston with FoodEngine!</title>
+
+    <!-- CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- CSS Custom theme -->
+    <link href="css/style.css" rel="stylesheet"/>
+
+    <!-- Angular framework -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5//angular.js"></script>
+    <!--<script src="vendor/angular/angular.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.js"></script>
+    <!--<script src="vendor/angular/angular-route.js"></script>-->
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--Services and Controllers-->
+    <script src="views/user/controllers/user.controller.client.js"></script>
+
 </head>
+
 <body>
-    <h1>Project Home Page</h1>
+    <div ng-view>
+        <h1>Project Home Page</h1>
+    </div>
 </body>
+
 </html>
