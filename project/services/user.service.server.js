@@ -1,14 +1,11 @@
-/**
- *  THIS FILE MUST BE UPDATED!
- */
 
-var app       = require('../../express');
-var userModel = require('../models/user/user.model.server.js');
-var session   = require('express-session');
-var passport  = require('passport');
-var auth      = authorized;
+var app           = require('../../express');
+var userModel     = require('../models/user/user.model.server.js');
+var session       = require('express-session');
+var projPassport  = require('passport');
+var auth          = authorized;
 
-var LocalStrategy = require('passport-local').Strategy;
+var ProjLocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var googleConfig = {
@@ -17,41 +14,40 @@ var googleConfig = {
     callbackURL  : process.env.GOOGLE_CALLBACK_URL
 };
 
-
 var bcrypt = require("bcrypt-nodejs");
 
-passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-passport.use(new LocalStrategy(localStrategy));
-passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializeUser);
+projPassport.use(new GoogleStrategy(googleConfig, googleStrategy));
+projPassport.use('projLocal', new ProjLocalStrategy(localStrategy));    //might not need first arg
+projPassport.serializeUser(serializeUser);
+projPassport.deserializeUser(deserializeUser);
 
 // endpoints
 
-app.post  ('/api/login', passport.authenticate('local'), login);
-app.post  ('/api/logout',       logout);
-app.post  ('/api/register',     register);
+app.post  ('/api/project/login', projPassport.authenticate('projLocal'), login);
+app.post  ('/api/project/logout',       logout);
+app.post  ('/api/project/register',     register);
 // app.post  ('/api/user',      auth, createUser);
-app.get   ('/api/loggedin',     loggedin);
-app.get   ('/api/admin',        checkAdmin);
+app.get   ('/api/project/loggedin',     loggedin);
+app.get   ('/api/project/admin',        checkAdmin);
 // app.get   ('/api/user',   auth, findAllUsers);
-app.get   ('/api/user',   isAdmin, findAllUsers);
+app.get   ('/api/project/user',   isAdmin, findAllUsers);
 // app.put   ('/api/user/:id',  auth, updateUser);
 // app.delete('/api/user/:id',  auth, deleteUser);
 
-app.post  ('/api/user/',        createUser);
-app.get   ('/api/user/:userId', findUserById);
+app.post  ('/api/project/user/',        createUser);
+app.get   ('/api/project/user/:userId', findUserById);
 // app.get   ('/api/user',         findUserByCredentials);
-app.get   ('/api/username',     findUserByUsername);
-app.put   ('/api/user/:userId', updateUser);
-app.delete('/api/user/:userId', isAdmin, deleteUser);
-app.delete('/api/unregister', unregister);
+app.get   ('/api/project/username',     findUserByUsername);
+app.put   ('/api/project/user/:userId', updateUser);
+app.delete('/api/project/user/:userId', isAdmin, deleteUser);
+app.delete('/api/project/unregister', unregister);
 
-app.get   ('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get   ('/auth/project/google', projPassport.authenticate('google', { scope : ['profile', 'email'] }));
 
-app.get('/auth/google/callback',
-    passport.authenticate('google', {
-        successRedirect: '/assignment/index.html#!/profile',
-        failureRedirect: '/assignment/index.html#!/login'
+app.get('/auth/project/google/callback',
+    projPassport.authenticate('google', {
+        successRedirect: '/project/index.html#!/profile',
+        failureRedirect: '/project/index.html#!/login'
     }));
 
 function googleStrategy(token, refreshToken, profile, done) {
