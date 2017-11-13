@@ -3,7 +3,7 @@
     angular
         .module('FoodEngine')
         .controller('loginController', loginController)
-        // .controller('registerController', registerController)
+        .controller('registerController', registerController)
         .controller('profileController', profileController);
 
     function loginController($location) { //, userService
@@ -79,7 +79,7 @@
                                ) {
 
         var model = this;
-        model.uid = currentUser._id;
+        // model.uid = currentUser._id;
 
         model.updateProfile = updateProfile;
         model.unregister = unregister;

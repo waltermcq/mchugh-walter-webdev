@@ -1,3 +1,6 @@
+/**
+ *  THIS FILE MUST BE UPDATED!
+ */
 
 var app       = require('../../express');
 var userModel = require('../models/user/user.model.server.js');
@@ -191,10 +194,10 @@ function register(req, res){
         );
 
     // .then( function(user){
-        //     req.login(user, function(status){  // notify passport - add to session, new cookie
-        //         res.json(user);
-        //     });
-        // });
+    //     req.login(user, function(status){  // notify passport - add to session, new cookie
+    //         res.json(user);
+    //     });
+    // });
 }
 
 function unregister(req, res) {
@@ -248,11 +251,11 @@ function deleteUser(req, res){
     userModel
         .deleteUser(userId)
         .then( function(status){
-            res.sendStatus(200);
-        },
-        function(error){
-            res.sendStatus(404);
-        });
+                res.sendStatus(200);
+            },
+            function(error){
+                res.sendStatus(404);
+            });
 }
 
 function findAllUsers(req, res) {
@@ -266,11 +269,11 @@ function findAllUsers(req, res) {
     return userModel
         .findAllUsers()
         .then( function(users) {
-            res.json(users);
-        },
-        function(error) {
-           res.sendStatus(404);
-        });
+                res.json(users);
+            },
+            function(error) {
+                res.sendStatus(404);
+            });
 
 }
 
