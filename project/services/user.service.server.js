@@ -42,10 +42,10 @@ app.put   ('/api/project/user/:userId', updateUser);
 app.delete('/api/project/user/:userId', isAdmin, deleteUser);
 app.delete('/api/project/unregister', unregister);
 
-app.get   ('/auth/project/google', projPassport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get   ('/auth/project/google', projPassport.authenticate('projGoogle', { scope : ['profile', 'email'] }));
 
 app.get('/auth/project/google/callback',
-    projPassport.authenticate('google', {
+    projPassport.authenticate('projGoogle', {
         successRedirect: '/project/index.html#!/profile',
         failureRedirect: '/project/index.html#!/login'
     }));

@@ -17,13 +17,13 @@ var googleConfig = {
 var bcrypt = require("bcrypt-nodejs");
 
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-passport.use(new LocalStrategy(localStrategy));
+passport.use('assignmentLocal', new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
 // endpoints
 
-app.post  ('/api/login', passport.authenticate('local'), login);
+app.post  ('/api/login', passport.authenticate('assignmentLocal'), login);
 app.post  ('/api/logout',       logout);
 app.post  ('/api/register',     register);
 // app.post  ('/api/user',      auth, createUser);
