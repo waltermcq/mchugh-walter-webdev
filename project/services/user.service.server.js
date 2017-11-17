@@ -1,11 +1,12 @@
 
 var app           = require('../../express');
 var userModel     = require('../models/user/user.model.server.js');
-var session       = require('express-session');
-var projPassport  = require('passport');
+var assnUserModel = require('../../assignment/models/user/user.model.server');
+// var session       = require('express-session');
+var projPassport  = require('passport');                                    /////////////////////// require passport
 var auth          = authorized;
 
-var ProjLocalStrategy = require('passport-local').Strategy;
+var ProjLocalStrategy = require('passport-local').Strategy;                 //////////////////////  require local
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var googleConfig = {
@@ -17,7 +18,7 @@ var googleConfig = {
 var bcrypt = require("bcrypt-nodejs");
 
 projPassport.use(new GoogleStrategy(googleConfig, googleStrategy));
-projPassport.use('projLocal', new ProjLocalStrategy(localStrategy));    //might not need first arg
+projPassport.use('projLocal', new ProjLocalStrategy(localStrategy));        //////////////////////    new localstrat
 projPassport.serializeUser(serializeUser);
 projPassport.deserializeUser(deserializeUser);
 
@@ -87,8 +88,6 @@ function googleStrategy(token, refreshToken, profile, done) {
         );
 }
 
-
-
 function localStrategy(username, password, done) {
     userModel
         .findUserByUsername(username)
@@ -157,16 +156,29 @@ function serializeUser(user, done) {
 }
 
 function deserializeUser(user, done) {      // pull from cookie
-    userModel
-        .findUserById(user._id)
-        .then(
-            function(user){
-                done(null, user);
-            },
-            function(err){
-                done(err, null);
-            }
-        );
+    if (user.project === 'YES') {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function (user) {
+                    done(null, user);
+                },
+                function (err) {
+                    done(err, null);
+                }
+            );
+    } else {
+        assnUserModel
+            .findUserById(user._id)
+            .then(
+                function (user) {
+                    done(null, user);
+                },
+                function (err) {
+                    done(err, null);
+                }
+            );
+    }
 }
 
 function register(req, res){

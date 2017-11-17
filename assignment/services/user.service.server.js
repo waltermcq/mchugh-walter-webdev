@@ -1,9 +1,10 @@
 
-var app       = require('../../express');
-var userModel = require('../models/user/user.model.server.js');
-var session   = require('express-session');
-var passport  = require('passport');
-var auth      = authorized;
+var app             = require('../../express');
+var userModel       = require('../models/user/user.model.server.js');
+var projUserModel   = require('../../project/models/user/user.model.server')
+var session         = require('express-session');
+var passport        = require('passport');
+var auth            = authorized;
 
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
@@ -157,16 +158,29 @@ function serializeUser(user, done) {
 }
 
 function deserializeUser(user, done) {      // pull from cookie
-    userModel
-        .findUserById(user._id)
-        .then(
-            function(user){
-                done(null, user);
-            },
-            function(err){
-                done(err, null);
-            }
-        );
+    if (user.project === 'YES') {
+        projUserModel
+            .findUserById(user._id)
+            .then(
+                function (user) {
+                    done(null, user);
+                },
+                function (err) {
+                    done(err, null);
+                }
+            );
+    } else {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function (user) {
+                    done(null, user);
+                },
+                function (err) {
+                    done(err, null);
+                }
+            );
+    }
 }
 
 function register(req, res){

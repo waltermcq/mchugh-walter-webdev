@@ -43,7 +43,7 @@
             });
     } //config
 
-    function checkLoggedIn($q, $location, userService){  // $timeout, $http, $rootScope
+    function checkLoggedIn($q, $location, userService){  // $timeout, $rootScope
         var deferred = $q.defer();
         userService
             .checkLoggedIn()
@@ -58,7 +58,7 @@
         return deferred.promise;
     }
 
-    function checkAdmin($q, $location, userService){  // $timeout, $http, $rootScope
+    function checkAdmin($q, $location, userService){  // $timeout, $rootScope
         var deferred = $q.defer();
         userService
             .checkAdmin()

@@ -7,8 +7,8 @@ var projUserSchema = mongoose.Schema({
     firstName:   String,
     lastName:    String,
     google: {
-        id:    String,
-        token: String
+        id:      String,
+        token:   String
     },
     email:       String,
     phone:       String,
@@ -20,6 +20,11 @@ var projUserSchema = mongoose.Schema({
     dateCreated: {
         type:    Date,
         default: Date.now()
+    },
+    project: {
+        type: String,
+        default: 'YES',
+        require: true
     }
 }
 // ,{collection: "user"}   //this sets the collection name to override the declared name in user.model.server.js
