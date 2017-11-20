@@ -75,7 +75,6 @@
     } //registerController
 
     function profileController($location,
-                               // $routeParams,
                                userService,
                                currentUser) {
 

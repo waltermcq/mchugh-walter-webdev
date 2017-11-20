@@ -19,8 +19,6 @@
     </div>
 </nav>
 
-
-
 <div class="container-fluid">
 
     <div ng-show="model.message"
@@ -61,6 +59,9 @@
     </form>
 
     <a class="btn btn-success btn-block"
+       href="#!/user/{{model.user._id}}/website">Search for Restaurants</a>
+
+    <a class="btn btn-success btn-block"
        href="#!/user/{{model.user._id}}/website">Websites</a>
 
     <a ng-if="model.user.roles.indexOf('ADMIN') > -1 "
@@ -78,7 +79,7 @@
 <nav class="navbar navbar-fixed-bottom navbar-flat">
     <div class="container-fluid">
         <p class="navbar-text pull-right">
-            <a href="#!/user/{{model.uid}}/" class="navbar-link">
+            <a href="#!/profile" class="navbar-link">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </p>

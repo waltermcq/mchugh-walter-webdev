@@ -30,7 +30,6 @@ app.post  ('/api/register',     register);
 // app.post  ('/api/user',      auth, createUser);
 app.get   ('/api/loggedin',     loggedin);
 app.get   ('/api/admin',        checkAdmin);
-// app.get   ('/api/user',   auth, findAllUsers);
 app.get   ('/api/user',   isAdmin, findAllUsers);
 // app.put   ('/api/user/:id',  auth, updateUser);
 // app.delete('/api/user/:id',  auth, deleteUser);

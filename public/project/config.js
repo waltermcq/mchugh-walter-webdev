@@ -12,6 +12,7 @@
                 controller: 'loginController',
                 controllerAs: 'model'
             })
+            // user
             .when('/login', {
                 templateUrl: '/project/views/user/templates/login.view.client.html',
                 controller: 'loginController',
@@ -29,6 +30,12 @@
                 resolve: {
                     currentUser: checkLoggedIn      // whatever checkLoggedIn returns (e.g. user) becomes an injectable object 'currentUser'
                 }
+            })
+            // search
+            .when('/search', {
+                templateUrl: '/project/views/search/templates/search.view.client.html'
+                // ,controller: 'searchCntroller',
+                // controllerAs: 'model'
             })
             // .when('/admin/admin', {
             //     templateUrl: '/project/views/admin/templates/admin-user.view.client.html',

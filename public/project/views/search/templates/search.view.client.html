@@ -1,0 +1,35 @@
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/login" class="navbar-link ">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#!/user/{{model.uid}}">
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateProfile(model.user)">
+                    <span class="glyphicon glyphicon-ok pull-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Find food deals in Boston!</h2>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control input-lg" placeholder="Thai" />
+                <span class="input-group-btn">
+                    <button class="btn btn-info btn-lg" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

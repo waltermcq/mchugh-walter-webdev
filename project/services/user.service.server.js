@@ -2,7 +2,6 @@
 var app           = require('../../express');
 var userModel     = require('../models/user/user.model.server.js');
 var assnUserModel = require('../../assignment/models/user/user.model.server');
-// var session       = require('express-session');
 var projPassport  = require('passport');                                    /////////////////////// require passport
 var auth          = authorized;
 
