@@ -10,7 +10,7 @@
                 Profile
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateProfile(model.user)">
+                <a ng-click="">
                     <span class="glyphicon glyphicon-ok pull-right"></span>
                 </a>
             </p>
@@ -23,13 +23,33 @@
         <div class="col-md-6">
             <h2>Find food deals in Boston!</h2>
             <div class="input-group input-group-lg">
-                <input type="text" class="form-control input-lg" placeholder="Thai" />
+                <input ng-model="model.queryText"
+                       type="text"
+                       class="form-control input-lg"
+                       placeholder="Thai"/>
                 <span class="input-group-btn">
-                    <button class="btn btn-info btn-lg" type="button">
+                    <button ng-click="model.search(model.queryText)"
+                            class="btn btn-info btn-lg"
+                            type="button">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </span>
             </div>
         </div>
     </div>
+</div>
+<div class="container-fluid">
+    <ul class="list-group">
+        <li ng-repeat="restaurant in model.restaurants"
+            ng-click="model.getDetails(restaurant.restaurant.id)"
+            class="list-group-item searchresult">
+            <h5 class="thick">
+                <a href="#!/search/detail/{{restaurant.restaurant.id}}">
+                    {{restaurant.restaurant.name}}
+                </a>
+            </h5>
+            <h5 class="italic">Area: {{restaurant.restaurant.location.locality}}</h5>
+            <h5>Cuisine: {{restaurant.restaurant.cuisines}}</h5>
+        </li>
+    </ul>
 </div>

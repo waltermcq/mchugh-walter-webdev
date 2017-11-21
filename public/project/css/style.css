@@ -16,3 +16,20 @@ body {
 a:hover {
     text-decoration-line: none;
 }
+
+.thick {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.searchresult {
+    position: relative;
+    display: block;
+    padding: 2px 10px;
+    margin-bottom: -1px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+}
