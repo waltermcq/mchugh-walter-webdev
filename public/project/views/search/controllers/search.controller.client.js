@@ -11,8 +11,6 @@
         var model = this;
 
         model.search = search;
-        model.renderSearch = renderSearch;
-        model.queryText = "";
 
         function search(searchText) {
 
@@ -31,15 +29,37 @@
             console.log("Query = " + queryText);
         } //search
 
-        function renderSearch() {
-            console.log('renderSearch!');
-        }
-
     }  //searchController
 
-    function detailController($location) { // ,searchService
+    function detailController($location,
+                              searchService,
+                              $routeParams) {
 
         var model = this;
+        model.rid = $routeParams.rid;
+        model.getComments = getComments;
+
+        (function init() {
+
+            searchService
+                .getDetails(model.rid)
+                .then(renderDetail, detailFail);
+
+            function renderDetail(restDetail) {
+                model.restaurant = restDetail;
+            }
+
+            function detailFail(response) {
+                model.message = "Oops, can't get restaurant details.  Try again later."
+            }
+
+        })();
+
+        // function getComments() {
+        //     commentService.
+        //         getCommentsForRest()
+        //         .then();
+        // }
 
     }  //detailController
 

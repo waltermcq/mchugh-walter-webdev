@@ -37,7 +37,7 @@
                 controller: 'searchController',
                 controllerAs: 'model'
             })
-            .when('/search/detail', {
+            .when('/detail/:rid', {
                 templateUrl: '/project/views/search/templates/detail.view.client.html',
                 controller: 'detailController',
                 controllerAs: 'model'

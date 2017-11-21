@@ -2,9 +2,9 @@
 (function() {
     angular
         .module('FoodEngine')
-        .factory('searchService', searchService);
+        .factory('commentService', commentService);
 
-    function searchService($http) {
+    function commentService($http) {
 
         var api = {
             restSearch: restSearch,
@@ -43,7 +43,7 @@
                 .then(function (response) {
                     return response.data;
                     //model.restDetail = response.data;
-            });
+                });
         }
     }
 

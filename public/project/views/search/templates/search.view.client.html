@@ -43,11 +43,11 @@
         <li ng-repeat="restaurant in model.restaurants"
             ng-click="model.getDetails(restaurant.restaurant.id)"
             class="list-group-item searchresult">
-            <h5 class="thick">
-                <a href="#!/search/detail/{{restaurant.restaurant.id}}">
+            <h4 class="thick">
+                <a href="#!/detail/{{restaurant.restaurant.id}}">
                     {{restaurant.restaurant.name}}
                 </a>
-            </h5>
+            </h4>
             <h5 class="italic">Area: {{restaurant.restaurant.location.locality}}</h5>
             <h5>Cuisine: {{restaurant.restaurant.cuisines}}</h5>
         </li>
