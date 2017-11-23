@@ -6,20 +6,32 @@ var commentSchema = mongoose.Schema({
                   default:  'REVIEW',
                   enum:     ['REVIEW', 'REPLY', 'MESSAGE']
     },
-    body: String,
-    author:      {type: mongoose.Schema.Types.ObjectId,
+
+    body:        String,
+
+    user  :      {type: mongoose.Schema.Types.ObjectId,
                   ref:  "ProjUserModel"
     },
 
     restaurant:  [{type: mongoose.Schema.Types.ObjectId,
                    ref: "RestaurantModel"
     }],
+
     dateCreated: {
         type:    Date,
         default: Date.now()
+    },
+
+    replyTo:     {type: mongoose.Schema.Types.Object,
+                 ref: "CommentModel"
+    },
+
+    editFlag:    {
+        type:    String,
+                 default: "0"
     }
 }
 // ,{collection: "user"}   //this sets the collection name to override the declared name in user.model.server.js
 );
 
-module.exports = projUserSchema;  // make available if this file is require() 'd.
+module.exports = CommentSchema;  // make available if this file is require() 'd.

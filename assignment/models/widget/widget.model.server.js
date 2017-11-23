@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
 var widgetSchema = require('./widget.schema.server.js');
-var widgetModel = mongoose.model('WidgetModel', widgetSchema);  // UserModel must be unique across app; DB collection name
+var widgetModel = mongoose.model('WidgetModel', widgetSchema);  // WidgetModel must be unique across app; DB collection name
 
 widgetModel.createWidget = createWidget;
 widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
