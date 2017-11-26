@@ -14,7 +14,9 @@ if(process.env.MLAB_USERNAME_WEBDEV) {                                  // check
 
 mongooseProj.connect(connectionString);
 
-require("./services/user.service.server");
+require("./services/user.service.server.js");
+require("./services/comment.service.server.js");
+
 // require("./services/website.service.server.js");
 
 // require("./models/models.server");  // this is where the above mongoose-related and heroku environment code would go

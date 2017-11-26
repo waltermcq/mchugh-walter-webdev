@@ -40,7 +40,10 @@
             .when('/detail/:rid', {
                 templateUrl: '/project/views/search/templates/detail.view.client.html',
                 controller: 'detailController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             // .when('/admin/admin', {
             //     templateUrl: '/project/views/admin/templates/admin-user.view.client.html',

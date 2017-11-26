@@ -2,10 +2,10 @@
 var app           = require('../../express');
 var userModel     = require('../models/user/user.model.server.js');
 var assnUserModel = require('../../assignment/models/user/user.model.server');
-var projPassport  = require('passport');                                    /////////////////////// require passport
+var projPassport  = require('passport');
 var auth          = authorized;
 
-var ProjLocalStrategy = require('passport-local').Strategy;                 //////////////////////  require local
+var ProjLocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var googleConfig = {
@@ -17,7 +17,7 @@ var googleConfig = {
 var bcrypt = require("bcrypt-nodejs");
 
 projPassport.use(new GoogleStrategy(googleConfig, googleStrategy));
-projPassport.use('projLocal', new ProjLocalStrategy(localStrategy));        //////////////////////    new localstrat
+projPassport.use('projLocal', new ProjLocalStrategy(localStrategy));
 projPassport.serializeUser(serializeUser);
 projPassport.deserializeUser(deserializeUser);
 

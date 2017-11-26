@@ -7,44 +7,31 @@
     function commentService($http) {
 
         var api = {
-            restSearch: restSearch,
-            getDetails: getDetails
+            createComment: createComment,
+            findCommentById: findCommentById
         };
         return api;
 
-        function restSearch(searchText) {
+        function createComment(restaurantId, comment){
 
-            var url = "https://developers.zomato.com/api/v2.1/search?entity_id=289&entity_type=city&q=" + searchText;
-            var config = {
-                headers: {
-                    'Accept':'application/json',
-                    'user-key' : "161cbd583023d9f219e9c154e58e6085"
-                }
-            };
+            var url = '/api/project/' + restaurantId + '/comment';
 
-            return $http.get(url, config)
-                .then(function (response) {
+            return $http.post(url, comment)   // url, then data
+                .then( function(response){
                     return response.data;
-                    // model.restaurants = response.data.restaurants;
                 });
         }
 
-        function getDetails(restaurantId) {
+        function findCommentById(commentId){
 
-            var url = "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + restaurantId;
-            var config = {
-                headers: {
-                    'Accept':'application/json',
-                    'user-key' : "161cbd583023d9f219e9c154e58e6085"
-                }
-            };
+            var url = '/api/project/comment/' + commentId;
 
-            return $http.get(url, config)
-                .then(function (response) {
-                    return response.data;
-                    //model.restDetail = response.data;
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;       //unwrap data from response object; transparent to controller
                 });
         }
+
     }
 
 })();

@@ -19,6 +19,7 @@ function findWebsitesByUser(req, res){
         },
         function(error){
             res.sendStatus(404);
+
         });
 }
 

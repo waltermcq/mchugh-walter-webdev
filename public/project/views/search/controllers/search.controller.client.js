@@ -2,7 +2,7 @@
 (function () {
     angular
         .module('FoodEngine')
-        .controller('searchController', searchController)
+        .controller('searchController', searchController)       //TODO rename this to restaurant controller(s)
         .controller('detailController', detailController);
 
     function searchController($location,
@@ -26,18 +26,24 @@
                 model.message = "Oops, search failed! Try again later."
             }
 
-            console.log("Query = " + queryText);
+            console.log("Query = " + searchText);
         } //search
 
     }  //searchController
 
     function detailController($location,
                               searchService,
+                              commentService,
+                              currentUser,
                               $routeParams) {
 
         var model = this;
+        var comment = {};
         model.rid = $routeParams.rid;
-        model.getComments = getComments;
+
+        model.createComment = createComment;
+        // model.getComments = getComments;
+        // model.claim = claim;
 
         (function init() {
 
@@ -54,6 +60,27 @@
             }
 
         })();
+
+        function createComment(commentBody) {
+
+            comment.body = commentBody;
+            comment.user = currentUser._id;
+
+            commentService
+                .createComment(model.rid, comment)
+                .then(
+                    function(response){
+                        console.log(response);
+                    },
+                    function(error){
+                        console.log(error);
+                    });
+
+        }
+
+        // function claim() {
+        //
+        // }
 
         // function getComments() {
         //     commentService.

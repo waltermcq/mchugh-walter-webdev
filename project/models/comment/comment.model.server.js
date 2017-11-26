@@ -14,8 +14,8 @@ CommentModel.updateComment           = updateComment;
 module.exports = CommentModel;         // the service layer can call projUserModel.createUser();
 
 function createComment(userId, restaurantId, comment){
-    comment._user = userId;
-    comment._restaurant = restaurantId;
+    comment.user = userId;
+    comment.restaurant = restaurantId;
     return CommentModel.create(comment);   // this is async, so we return a promise (return);
 }
 
@@ -28,14 +28,14 @@ function findAllComments() {
 }
 
 function findAllCommentsByUser(userId) {
-    return CommentModel.find({_user: userId})
-        .populate("_user")
+    return CommentModel.find({user: userId})
+        .populate('user')
         .exec();
 }
 
 function findAllCommentsForRest(restaurantId) {
-    return CommentModel.find({_restaurant: restaurantId})
-        .populate("_restaurant")
+    return CommentModel.find({restaurant: restaurantId})
+        .populate('user')
         .exec();
 }
 

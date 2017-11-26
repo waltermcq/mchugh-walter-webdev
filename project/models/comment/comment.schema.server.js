@@ -9,22 +9,20 @@ var commentSchema = mongoose.Schema({
 
     body:        String,
 
-    user  :      {type: mongoose.Schema.Types.ObjectId,
+    user:        {type: mongoose.Schema.Types.ObjectId,
                   ref:  "ProjUserModel"
     },
 
-    restaurant:  [{type: mongoose.Schema.Types.ObjectId,
-                   ref: "RestaurantModel"
-    }],
+    restaurant:  String,
 
     dateCreated: {
         type:    Date,
         default: Date.now()
     },
 
-    replyTo:     {type: mongoose.Schema.Types.Object,
-                 ref: "CommentModel"
-    },
+    // replyTo:     {type: mongoose.Schema.Types.Object,
+    //              ref: "CommentModel"
+    // },
 
     editFlag:    {
         type:    String,
@@ -34,4 +32,4 @@ var commentSchema = mongoose.Schema({
 // ,{collection: "user"}   //this sets the collection name to override the declared name in user.model.server.js
 );
 
-module.exports = CommentSchema;  // make available if this file is require() 'd.
+module.exports = commentSchema;  // make available if this file is require() 'd.

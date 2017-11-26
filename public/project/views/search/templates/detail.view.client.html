@@ -28,6 +28,17 @@
 </div>
 
 <div class="container-fluid">
+    <div class="input-group">
+        <input ng-model="commentBody" type="text" class="form-control">
+        <span class="input-group-btn">
+            <a ng-click="model.createComment(commentBody)" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-comment"></span>
+            </a>
+        </span>
+    </div>
+</div>
+
+<div class="container-fluid">
     <ul class="list-group">
         <li ng-repeat="comment in model.comments"
             ng-click="model.reply()"
