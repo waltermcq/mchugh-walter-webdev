@@ -8,7 +8,8 @@
 
         var api = {
             createComment: createComment,
-            findCommentById: findCommentById
+            findCommentById: findCommentById,
+            findAllCommentsForRest: findAllCommentsForRest
         };
         return api;
 
@@ -25,6 +26,16 @@
         function findCommentById(commentId){
 
             var url = '/api/project/comment/' + commentId;
+
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;       //unwrap data from response object; transparent to controller
+                });
+        }
+
+        function findAllCommentsForRest(restaurantId){
+
+            var url = '/api/project/' + restaurantId + '/comment';
 
             return $http.get(url)
                 .then( function(response){

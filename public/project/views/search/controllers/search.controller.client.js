@@ -38,11 +38,10 @@
                               $routeParams) {
 
         var model = this;
-        var comment = {};
         model.rid = $routeParams.rid;
 
         model.createComment = createComment;
-        // model.getComments = getComments;
+        model.getAllComments = getAllComments;
         // model.claim = claim;
 
         (function init() {
@@ -50,6 +49,8 @@
             searchService
                 .getDetails(model.rid)
                 .then(renderDetail, detailFail);
+
+            getAllComments();
 
             function renderDetail(restDetail) {
                 model.restaurant = restDetail;
@@ -63,30 +64,36 @@
 
         function createComment(commentBody) {
 
+            var comment = {};
             comment.body = commentBody;
             comment.user = currentUser._id;
 
             commentService
                 .createComment(model.rid, comment)
                 .then(
-                    function(response){
-                        console.log(response);
-                    },
+                    getAllComments()
+                    ,
                     function(error){
                         console.log(error);
                     });
 
+            getAllComments();
+
         }
 
-        // function claim() {
-        //
-        // }
-
-        // function getComments() {
-        //     commentService.
-        //         getCommentsForRest()
-        //         .then();
-        // }
+        function getAllComments() {
+            commentService
+                .findAllCommentsForRest(model.rid)
+                .then(
+                    function(comments) {
+                        model.comments = comments;
+                        console.log(comments);
+                    },
+                    function(error) {
+                        model.message = "Error getting comments!";
+                    }
+                );
+        }
 
     }  //detailController
 
