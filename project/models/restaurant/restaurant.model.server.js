@@ -3,12 +3,12 @@ var mongoose         = require('mongoose');
 var RestaurantSchema = require('./restaurant.schema.server.js');
 var RestaurantModel  = mongoose.model('RestaurantModel', RestaurantSchema);  // must be unique across app; DB collection name
 
-RestaurantModel.createRest     = createRest;
-RestaurantModel.findRestById   = findRestById;
-RestaurantModel.findAllRest    = findAllRest;
+RestaurantModel.createRest      = createRest;
+RestaurantModel.findRestById    = findRestById;
+RestaurantModel.findAllRest     = findAllRest;
 RestaurantModel.findRestForUser = findRestForUser;
-RestaurantModel.deleteRest     = deleteRest;
-RestaurantModel.updateRest     = updateRest;
+RestaurantModel.deleteRest      = deleteRest;
+RestaurantModel.updateRest      = updateRest;
 
 module.exports = RestaurantModel;
 
@@ -26,9 +26,9 @@ function findAllRest() {
 }
 
 function findRestForUser(userId) {
-    return RestaurantModel.find({user: userId})
-        .populate('user')
-        .exec();
+    return RestaurantModel.find({user: userId});
+        // .populate('user')
+        // .exec();
 }
 
 function deleteRest(restaurantId){
