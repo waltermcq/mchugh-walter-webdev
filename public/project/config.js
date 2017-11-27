@@ -7,10 +7,24 @@
     function configuration($routeProvider) {
 
         $routeProvider
-            .when('/', {                                                                //TODO this should be default search page
-                templateUrl: '/project/views/user/templates/login.view.client.html',
-                controller: 'loginController',
+            // search
+            .when('/', {
+                templateUrl: '/project/views/search/templates/search.view.client.html',
+                controller: 'searchController',
                 controllerAs: 'model'
+            })
+            .when('/search', {
+                templateUrl: '/project/views/search/templates/search.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model'
+            })
+            .when('/detail/:rid', {
+                templateUrl: '/project/views/search/templates/detail.view.client.html',
+                controller: 'detailController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             // user
             .when('/login', {
@@ -31,20 +45,6 @@
                     currentUser: checkLoggedIn      // whatever checkLoggedIn returns (e.g. user) becomes an injectable object 'currentUser'
                 }
             })
-            // search
-            .when('/search', {
-                templateUrl: '/project/views/search/templates/search.view.client.html',
-                controller: 'searchController',
-                controllerAs: 'model'
-            })
-            .when('/detail/:rid', {
-                templateUrl: '/project/views/search/templates/detail.view.client.html',
-                controller: 'detailController',
-                controllerAs: 'model',
-                resolve: {
-                    currentUser: checkLoggedIn
-                }
-            })
             // .when('/admin/admin', {
             //     templateUrl: '/project/views/admin/templates/admin-user.view.client.html',
             //     controller: 'adminUserController',
@@ -54,7 +54,7 @@
             //     }
             // })
             .otherwise({
-                redirectTo: "/login"
+                redirectTo: "/search"
             });
     } //config
 

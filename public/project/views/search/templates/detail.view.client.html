@@ -19,28 +19,28 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="col-xs-12">
-        <h2>{{model.restaurant.name}}</h2>
-        <img ng-src="{{model.restaurant.thumb}}" width="200px">
-        <h5>{{model.restaurant.location.address}}</h5>
-    </div>
+    <a ng-click="model.login(username, password)"
+    class="btn btn-danger">Claim Restaurant</a>
 </div>
 
 <div class="container-fluid">
-    <div class="col-xs-12">
+        <h2>{{model.restaurant.name}}</h2>
+        <img ng-src="{{model.restaurant.thumb}}" width="200px">
+        <h5>{{model.restaurant.location.address}}</h5>
+</div>
+
+<div class="container-fluid">
         <h3>What users said about {{model.restaurant.name}}:</h3>
         <ul class="list-group">
             <li ng-repeat="comment in model.comments"
                 class="list-group-item searchresult">
                 <h4>{{comment.body}}</h4>
-                <h5 class="italic">User {{comment.user.username}}<h5>
+                <h5 class="italic">By user {{comment.user.username}} on {{comment.user.dateCreated | date}}<h5>
             </li>
         </ul>
-    </div>
 </div>
 
 <div class="container-fluid">
-    <div class="col-xs-12">
         <div class="input-group">
             <input ng-model="commentBody"
                    type="text"
@@ -52,5 +52,4 @@
                 </a>
             </span>
         </div>
-    </div>
 </div>

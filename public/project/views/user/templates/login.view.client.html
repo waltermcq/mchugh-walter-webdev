@@ -1,33 +1,52 @@
-<div class="container-fluid"
-    ng-controller="loginController">
-    <h2>FoodEngine Login</h2>
-
-    <div ng-show="model.message" class="alert alert-danger">
-        {{model.message}}
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#!/">
+                Back to Search
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/profile">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </p>
+        </div>
     </div>
+</nav>
 
-    <label for="username">Username</label>
-    <input ng-model="username"
-           type="text"
-           id="username"
-           class="form-control"
-           placeholder="user"/>
+    <div class="container-fluid">
+        <h2>FoodEngine Login</h2>
 
-    <label for="password">Password</label>
-    <input ng-model="password"
-           type="password"
-           id="password"
-           class="form-control"
-           placeholder="password"/>
+        <div ng-show="model.message" class="alert alert-danger">
+            {{model.message}}
+        </div>
 
-    <a ng-click="model.login(username, password)"
-       class="btn btn-primary btn-block">Login</a>
+        <label for="username">Username</label>
+        <input ng-model="username"
+               type="text"
+               id="username"
+               class="form-control"
+               placeholder="user"/>
 
-    <a href="/auth/project/google" class="btn btn-primary btn-block">
-        <span class="fa fa-google-plus"></span>
-        Login
-    </a>
+        <label for="password">Password</label>
+        <input ng-model="password"
+               type="password"
+               id="password"
+               class="form-control"
+               placeholder="password"/>
 
-    <a class="btn btn-success btn-block"
-       href="#!/register">Register</a>
-</div>
+        <a ng-click="model.login(username, password)"
+           class="btn btn-primary btn-block">Login</a>
+
+        <a href="/auth/project/google" class="btn btn-primary btn-block">
+            <span class="fa fa-google-plus"></span>
+            Login
+        </a>
+
+        <a class="btn btn-success btn-block"
+           href="#!/register">Register</a>
+    </div>
