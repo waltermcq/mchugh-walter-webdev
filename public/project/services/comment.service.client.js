@@ -7,9 +7,16 @@
     function commentService($http) {
 
         var api = {
-            createComment: createComment,
-            findCommentById: findCommentById,
-            findAllCommentsForRest: findAllCommentsForRest
+            findCommentById:        findCommentById,
+            findAllCommentsForRest: findAllCommentsForRest,
+            // findAllComments:        findAllComments,     TODO implement
+            createComment:          createComment,
+            updateComment:          updateComment,
+            deleteComment:          deleteComment,
+            //getReply:               getReply,
+            createReply:            createReply,
+            updateReply:            updateReply,
+            deleteReply:            deleteReply
         };
         return api;
 
@@ -39,8 +46,63 @@
 
             return $http.get(url)
                 .then( function(response){
-                    return response.data;       //unwrap data from response object; transparent to controller
+                    return response.data;
                 });
+        }
+
+        function updateComment(commentId, comment) {
+
+            var url = '/api/project/comment/' + commentId;
+
+            return $http.put(url, comment)
+                .then( function(response){
+                    return response.data;
+                });
+
+        }
+
+        function deleteComment(commentId) {
+
+            var url = '/api/project/comment/' + commentId;
+
+            return $http.delete(url)
+                .then( function(response){
+                    return response.data;
+                });
+
+        }
+
+        function createReply(commentId, comment) {
+
+            var url = '/api/project/' + commentId + '/reply';
+
+            return $http.post(url, comment)   // url, then data
+                .then( function(response){
+                    return response.data;
+                });
+
+        }
+
+        function updateReply(commentId, comment) {
+
+            var url = '/api/project/' + commentId + '/reply';
+
+            return $http.put(url, comment)   // url, then data
+                .then( function(response){
+                    return response.data;
+                });
+
+        }
+
+        function deleteReply(commentId) {
+
+            var url = '/api/project/' + commentId + '/reply';
+
+            return $http.delete(url)   // url, then data
+                .then( function(response){
+                    return response.data;
+                });
+
         }
 
     }
