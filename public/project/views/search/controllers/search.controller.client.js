@@ -41,9 +41,14 @@
         var model = this;
         model.rid = $routeParams.rid;
 
-        model.createComment = createComment;
-        model.getAllComments = getAllComments;
-        model.claimRestaurant = claimRestaurant;
+        model.createComment     = createComment;
+        model.getAllComments    = getAllComments;
+        model.editComment       = editComment;
+        model.deleteComment     = deleteComment;
+        model.claimRestaurant   = claimRestaurant;
+        model.createReply       = createReply;
+        model.updateReply       = updateReply;
+        model.deleteReply       = deleteReply;
 
         (function init() {
 
@@ -97,6 +102,91 @@
                 );
         }
 
+        function editComment(commentId, comment) {
+
+            commentService
+                .updateComment(commentId, comment)
+                .then(
+                function(response) {
+                    console.log(response);
+                    model.message = "Comment updated!";
+                    getAllComments();
+                },
+                function(error) {
+                    model.message = "Error editing comment!";
+                }
+            );
+
+        }
+
+        function deleteComment(commentId) {
+
+            commentService
+                .deleteComment(commentId)
+                .then(
+                    function(response) {
+                        console.log(response);
+                        model.message = "Comment deleted!";
+                        getAllComments();
+                    },
+                    function(error) {
+                        model.message = "Error deleting comment!";
+                    }
+                );
+
+        }
+
+        function createReply(commentId, comment) {
+
+            commentService
+                .createReply(commentId, comment)
+                .then(
+                    function(response) {
+                        console.log(response);
+                        model.message = "Replied to comment!";
+                        getAllComments();
+                    },
+                    function(error) {
+                        model.message = "Error creating reply!";
+                    }
+                );
+
+        }
+
+        function updateReply(commentId, comment) {
+
+            commentService
+                .updateReply(commentId, comment)
+                .then(
+                    function(response) {
+                        console.log(response);
+                        model.message = "Replied to comment!";
+                        getAllComments();
+                    },
+                    function(error) {
+                        model.message = "Error creating reply!";
+                    }
+                );
+
+        }
+
+        function deleteReply(commentId) {
+
+            commentService
+                .deleteReply(commentId)
+                .then(
+                    function(response) {
+                        console.log(response);
+                        model.message = "Deleted reply!";
+                        getAllComments();
+                    },
+                    function(error) {
+                        model.message = "Error deleting reply!";
+                    }
+                );
+
+        }
+
         function claimRestaurant(restaurantId) {
 
             var rest = {
@@ -108,8 +198,7 @@
                 .createRest(restaurantId, rest)
                 .then(
                     function(response) {
-                        console.log(response);
-                        // change location to offer edit page
+                        console.log(response);  // TODO change location to offer edit page
                     },
                     function(error) {
                         model.message = "Error claiming restaurant!";
