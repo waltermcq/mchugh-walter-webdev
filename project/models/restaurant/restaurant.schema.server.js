@@ -9,7 +9,7 @@ var restaurantSchema = mongoose.Schema({
 
     offer: String,
 
-    restaurantId: String,
+    restaurantId: {type: String, unique: true},
 
     dateClaimed: {type: Date,
                   default: Date.now()

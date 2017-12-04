@@ -19,37 +19,55 @@
 </nav>
 
 <div class="container-fluid">
-    <a ng-click="model.login(username, password)"
+    <a ng-click="model.claimRestaurant(model.rid)"
     class="btn btn-danger">Claim Restaurant</a>
 </div>
 
 <div class="container-fluid">
-        <h2>{{model.restaurant.name}}</h2>
-        <img ng-src="{{model.restaurant.thumb}}" width="200px">
-        <h5>{{model.restaurant.location.address}}</h5>
+    <h2>{{model.restaurant.name}}</h2>
+    <img ng-src="{{model.restaurant.thumb}}" width="200px">
+    <h5>{{model.restaurant.location.address}}</h5>
 </div>
 
 <div class="container-fluid">
-        <h3>What users said about {{model.restaurant.name}}:</h3>
-        <ul class="list-group">
-            <li ng-repeat="comment in model.comments"
-                class="list-group-item searchresult">
-                <h4>{{comment.body}}</h4>
-                <h5 class="italic">By user {{comment.user.username}} on {{comment.user.dateCreated | date}}<h5>
-            </li>
-        </ul>
+    <h3>What users said about {{model.restaurant.name}}:</h3>
+    <ul class="list-group">
+        <li ng-repeat="comment in model.comments"
+            class="list-group-item searchresult">
+
+            <button ng-click="model.createMessage(model.message)"
+                    class="btn  btn-danger btn-comment pull-right">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            <button ng-click="model.createMessage(model.message)"
+                    class="btn  btn-success btn-comment pull-right">
+                <span class="glyphicon glyphicon-comment"></span>
+            </button>
+            <button ng-click="model.createMessage(model.message)"
+                    class="btn  btn-primary btn-comment pull-right">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+
+            <h4>{{comment.body}}</h4>
+            <h5 class="italic">By user {{comment.user.username}} on {{comment.user.dateCreated | date}}<h5>
+
+
+
+        </li>
+    </ul>
 </div>
 
+
 <div class="container-fluid">
-        <div class="input-group">
-            <input ng-model="commentBody"
-                   type="text"
-                   class="form-control"
-                   placeholder="Add your comment about {{model.restaurant.name}}">
-            <span class="input-group-btn">
-                <a ng-click="model.createComment(commentBody)" class="btn btn-default" type="button">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </span>
-        </div>
+    <div class="input-group">
+        <input ng-model="commentBody"
+               type="text"
+               class="form-control"
+               placeholder="Add your comment about {{model.restaurant.name}}">
+        <span class="input-group-btn">
+            <a ng-click="model.createComment(commentBody)" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </span>
+    </div>
 </div>

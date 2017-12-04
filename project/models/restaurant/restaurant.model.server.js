@@ -12,8 +12,8 @@ RestaurantModel.updateRest      = updateRest;
 
 module.exports = RestaurantModel;
 
-function createRest(userId, restaurant) {
-    restaurant.user = userId;
+function createRest(restaurantId, restaurant) {
+    restaurant.restaurantId = restaurantId;
     return RestaurantModel.create(restaurant);
 }
 

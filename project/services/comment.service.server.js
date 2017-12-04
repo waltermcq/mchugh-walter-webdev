@@ -4,10 +4,15 @@ var commentModel  = require('../models/comment/comment.model.server.js');
 
 app.get   ('/api/project/comment/:commentId',    findCommentById);
 app.get   ('/api/project/:restaurantId/comment', findAllCommentsforRest);
-app.get   ('/api/project/:restaurantId/comment', findAllComments);  //TODO isAdmin
+app.get   ('/api/project/:restaurantId/comment', findAllComments);           //TODO isAdmin
 app.post  ('/api/project/:restaurantId/comment', createComment);
 app.put   ('/api/project/comment/:commentId',    updateComment);
 app.delete('/api/project/comment/:commentId',    deleteComment);
+
+// app.get   ('/api/project/:commentId/reply',      getReply);   // probably don't need this
+app.post  ('/api/project/:commentId/reply',      createReply);
+app.put   ('/api/project/:commentId/reply',      updateReply);
+app.delete('/api/project/:commentId/reply',      deleteReply);
 
 // app.delete('/api/project/comment/:commentId', isAdmin, deleteComment);
 // app.put   ('/api/user/:id',  auth, updateUser);
@@ -93,4 +98,51 @@ function deleteComment(req, res) {
             function(error){
                 res.sendStatus(404);
             });
+}
+
+function createReply(req, res) {
+    var commentId = req.params['commentId']
+    var reply = req.body;
+
+    commentModel
+        .createReply(commentId, reply)
+        .then(
+            function(status){
+                res.sendStatus(200);
+            },
+            function(error){
+                res.sendStatus(404);
+            });
+
+}
+
+function updateReply(req, res) {
+    var commentId = req.params['commentId']
+    var reply = req.body;
+
+    commentModel
+        .updateReply(commentId, reply)
+        .then(
+            function(status){
+                res.sendStatus(200);
+            },
+            function(error){
+                res.sendStatus(404);
+            });
+
+}
+
+function deleteReply(req, res) {
+    var commentId = req.params['commentId']
+
+    commentModel
+        .deleteReply(commentId)
+        .then(
+            function(status){
+                res.sendStatus(200);
+            },
+            function(error){
+                res.sendStatus(404);
+            });
+
 }

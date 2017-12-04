@@ -34,6 +34,7 @@
     function detailController($location,
                               searchService,
                               commentService,
+                              restaurantService,
                               currentUser,
                               $routeParams) {
 
@@ -42,7 +43,7 @@
 
         model.createComment = createComment;
         model.getAllComments = getAllComments;
-        // model.claim = claim;
+        model.claimRestaurant = claimRestaurant;
 
         (function init() {
 
@@ -82,6 +83,7 @@
         }
 
         function getAllComments() {
+
             commentService
                 .findAllCommentsForRest(model.rid)
                 .then(
@@ -94,6 +96,28 @@
                     }
                 );
         }
+
+        function claimRestaurant(restaurantId) {
+
+            var rest = {
+                user: currentUser._id,
+                restaurantId: restaurantId + ""
+            };
+
+            restaurantService
+                .createRest(restaurantId, rest)
+                .then(
+                    function(response) {
+                        console.log(response);
+                        // change location to offer edit page
+                    },
+                    function(error) {
+                        model.message = "Error claiming restaurant!";
+                    }
+                );
+
+        }
+
 
     }  //detailController
 

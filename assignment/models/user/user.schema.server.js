@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-    username:    {type: String, require: true},
+    username:    {type: String, require: true, unique: true},
     password:    {type: String, require: true},
     firstName:   String,
     lastName:    String,
@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema({
     },
     email:       String,
     phone:       String,
-    roles:       [{type: String, default: 'USER', enum: ['USER', 'ADMIN']}],
+    roles:       [{type: String, default: 'USER', enum: ['USER', 'MANAGER', 'ADMIN']}],
     websites:    [
         {type: mongoose.Schema.Types.ObjectId, ref: "WebsiteModel"}
     ],       // user to site, site to user

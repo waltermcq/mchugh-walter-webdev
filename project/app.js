@@ -16,6 +16,7 @@ mongooseProj.connect(connectionString);
 
 require("./services/user.service.server.js");
 require("./services/comment.service.server.js");
+require("./services/restaurant.service.server.js");
 
 // require("./services/website.service.server.js");
 

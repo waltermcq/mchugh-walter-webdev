@@ -3,13 +3,16 @@ var mongoose        = require('mongoose');
 var CommentSchema   = require('./comment.schema.server.js');
 var CommentModel    = mongoose.model('CommentModel', CommentSchema);  // must be unique across app; DB collection name
 
-CommentModel.createComment           = createComment;
-CommentModel.findCommentById         = findCommentById;
-CommentModel.findAllComments         = findAllComments;
-CommentModel.findAllCommentsByUser   = findAllCommentsByUser;
-CommentModel.findAllCommentsForRest  = findAllCommentsForRest;
-CommentModel.deleteComment           = deleteComment;
-CommentModel.updateComment           = updateComment;
+CommentModel.createComment          = createComment;
+CommentModel.findCommentById        = findCommentById;
+CommentModel.findAllComments        = findAllComments;
+CommentModel.findAllCommentsByUser  = findAllCommentsByUser;
+CommentModel.findAllCommentsForRest = findAllCommentsForRest;
+CommentModel.deleteComment          = deleteComment;
+CommentModel.updateComment          = updateComment;
+CommentModel.createReply            = createReply;
+CommentModel.updateReply            = updateReply;
+CommentModel.deleteReply            = deleteReply;
 
 module.exports = CommentModel;         // the service layer can call projUserModel.createUser();
 
@@ -49,6 +52,35 @@ function updateComment(commentId, comment){
         $set : {                                    // if we just change to 'set : user' it will override everything
             body: comment.body,
             editFlag: "1"
+        }
+    });
+}
+
+function createReply(commentId, rep) {
+
+    return CommentModel.update({_id: commentId}, {
+        $set : {
+            reply : rep
+        }
+    });
+}
+
+function updateReply(commentId, rep) {
+
+    return CommentModel.update({_id: commentId}, {
+        $set : {
+            reply : rep,
+            editFlag : "1"
+        }
+    });
+}
+
+function deleteReply(commentId) {
+
+    return CommentModel.update({_id: commentId}, {
+        $set : {
+            reply : "",
+            editFlag : "1"
         }
     });
 }

@@ -20,9 +20,10 @@ var commentSchema = mongoose.Schema({
         default: Date.now()
     },
 
-    // replyTo:     {type: mongoose.Schema.Types.Object,
-    //              ref: "CommentModel"
-    // },
+    reply:       {type: String,
+                  author: String,
+                  editFlag: String, default: "0"
+    },
 
     editFlag:    {
         type:    String,

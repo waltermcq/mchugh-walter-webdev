@@ -14,6 +14,8 @@ var googleConfig = {
     callbackURL  : process.env.GOOGLE_CALLBACK_URL
 };
 
+
+
 var bcrypt = require("bcrypt-nodejs");
 
 projPassport.use(new GoogleStrategy(googleConfig, googleStrategy));
