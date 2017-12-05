@@ -60,7 +60,8 @@ function createReply(commentId, rep) {
 
     return CommentModel.update({_id: commentId}, {
         $set : {
-            reply : rep
+            replyText : rep.replyText,
+            replyAuthor: rep.replyAuthor
         }
     });
 }
@@ -69,8 +70,8 @@ function updateReply(commentId, rep) {
 
     return CommentModel.update({_id: commentId}, {
         $set : {
-            reply : rep,
-            editFlag : "1"
+            replyText : rep.replyText,
+            replyAuthor: rep.replyAuthor
         }
     });
 }
@@ -79,8 +80,8 @@ function deleteReply(commentId) {
 
     return CommentModel.update({_id: commentId}, {
         $set : {
-            reply : "",
-            editFlag : "1"
+            replyText : "",
+            replyAuthor: ""
         }
     });
 }

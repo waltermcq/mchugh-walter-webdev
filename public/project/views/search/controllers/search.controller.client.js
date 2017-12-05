@@ -116,7 +116,6 @@
                     model.message = "Error editing comment!";
                 }
             );
-
         }
 
         function deleteComment(commentId) {
@@ -133,16 +132,22 @@
                         model.message = "Error deleting comment!";
                     }
                 );
-
         }
 
-        function createReply(commentId, comment) {
+        function createReply(commentId, replyText) {
+
+            console.log("Reply text is " + replyText);
+
+            //make a reply object?
+            var rep = {
+                replyText: replyText,
+                author: currentUser._id,
+            };
 
             commentService
-                .createReply(commentId, comment)
+                .createReply(commentId, rep)
                 .then(
                     function(response) {
-                        console.log(response);
                         model.message = "Replied to comment!";
                         getAllComments();
                     },
@@ -150,7 +155,6 @@
                         model.message = "Error creating reply!";
                     }
                 );
-
         }
 
         function updateReply(commentId, comment) {
@@ -159,7 +163,6 @@
                 .updateReply(commentId, comment)
                 .then(
                     function(response) {
-                        console.log(response);
                         model.message = "Replied to comment!";
                         getAllComments();
                     },
@@ -167,7 +170,6 @@
                         model.message = "Error creating reply!";
                     }
                 );
-
         }
 
         function deleteReply(commentId) {
@@ -176,7 +178,6 @@
                 .deleteReply(commentId)
                 .then(
                     function(response) {
-                        console.log(response);
                         model.message = "Deleted reply!";
                         getAllComments();
                     },
@@ -184,7 +185,6 @@
                         model.message = "Error deleting reply!";
                     }
                 );
-
         }
 
         function claimRestaurant(restaurantId) {
@@ -204,7 +204,6 @@
                         model.message = "Error claiming restaurant!";
                     }
                 );
-
         }
 
 

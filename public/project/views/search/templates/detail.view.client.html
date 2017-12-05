@@ -22,7 +22,11 @@
     <a ng-click="model.claimRestaurant(model.rid)"
     class="btn btn-danger">Claim Restaurant</a>
 </div>
-
+<div class="container-fluid">
+    <div ng-show="model.message" class="alert alert-info">
+        {{model.message}}
+    </div>
+</div>
 <div class="container-fluid">
     <h2>{{model.restaurant.name}}</h2>
     <img ng-src="{{model.restaurant.thumb}}" width="200px">
@@ -40,24 +44,29 @@
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
             <button ng-click="model.createMessage(model.message)"
-                    class="btn  btn-success btn-comment pull-right">
-                <span class="glyphicon glyphicon-comment"></span>
-            </button>
-            <button ng-click="model.createMessage(model.message)"
-                    class="btn  btn-primary btn-comment pull-right">
+                    class="btn  btn-warning btn-comment pull-right">
                 <span class="glyphicon glyphicon-pencil"></span>
             </button>
 
             <h4>{{comment.body}}</h4>
             <h5 class="italic">By user {{comment.user.username}} on {{comment.user.dateCreated | date}}<h5>
-
-
-
+            <h5 class="italic">Reply by {{model.restaurant.name}}: {{comment.replyText}}<h5>
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       ng-model=replyText
+                       placeholder="reply text">
+                <span class="input-group-btn">
+                    <a ng-click="model.createReply(comment._id, replyText)" class="btn btn-primary" type="button">
+                        <span class="glyphicon glyphicon-comment"></span>
+                     </a>
+                </span>
+            </div>
         </li>
     </ul>
 </div>
 
-
+<!--TODO ADD PADDING-->
 <div class="container-fluid">
     <div class="input-group">
         <input ng-model="commentBody"
@@ -65,8 +74,8 @@
                class="form-control"
                placeholder="Add your comment about {{model.restaurant.name}}">
         <span class="input-group-btn">
-            <a ng-click="model.createComment(commentBody)" class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-plus"></span>
+            <a ng-click="model.createComment(commentBody)" class="btn btn-success" type="button">
+                <span class="glyphicon glyphicon-comment"></span>
             </a>
         </span>
     </div>

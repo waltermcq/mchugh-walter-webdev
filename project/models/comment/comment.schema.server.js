@@ -20,10 +20,9 @@ var commentSchema = mongoose.Schema({
         default: Date.now()
     },
 
-    reply:       {type: String,
-                  author: String,
-                  editFlag: String, default: "0"
-    },
+    replyText:   String,
+
+    replyAuthorId: String,
 
     editFlag:    {
         type:    String,

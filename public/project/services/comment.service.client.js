@@ -72,22 +72,22 @@
 
         }
 
-        function createReply(commentId, comment) {
+        function createReply(commentId, reply) {
 
             var url = '/api/project/' + commentId + '/reply';
 
-            return $http.post(url, comment)   // url, then data
+            return $http.post(url, reply)   // url, then data
                 .then( function(response){
                     return response.data;
                 });
 
         }
 
-        function updateReply(commentId, comment) {
+        function updateReply(commentId, reply) {
 
             var url = '/api/project/' + commentId + '/reply';
 
-            return $http.put(url, comment)   // url, then data
+            return $http.put(url, reply)   // url, then data
                 .then( function(response){
                     return response.data;
                 });
