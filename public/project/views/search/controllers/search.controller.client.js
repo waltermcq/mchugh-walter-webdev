@@ -58,6 +58,9 @@
 
             getAllComments();
 
+            model.user = currentUser;
+            console.log(model.user);
+
             function renderDetail(restDetail) {
                 model.restaurant = restDetail;
             }

@@ -40,7 +40,8 @@
         <li ng-repeat="comment in model.comments"
             class="list-group-item searchresult">
 
-            <button ng-click="model.deleteComment(comment._id)"
+            <button ng-if="model.user.roles.indexOf('ADMIN') > -1 || model.user._id === comment.user._id"
+                    ng-click="model.deleteComment(comment._id)"
                     class="btn  btn-danger btn-comment pull-right">
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
