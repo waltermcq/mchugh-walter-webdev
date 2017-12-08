@@ -76,6 +76,7 @@
 
     function profileController($location,
                                userService,
+                               restaurantService,
                                currentUser) {
 
         var model = this;
@@ -84,13 +85,32 @@
         model.updateProfile = updateProfile;
         model.unregister = unregister;
         model.logOut = logOut;
+        model.renderUser = renderUser;
+        model.findClaimedRestaurant = findClaimedRestaurant;
 
         (function init(){
+
             renderUser(currentUser);
+
+            if(currentUser.roles.indexOf('SELLER') > -1) {
+                findClaimedRestaurant(currentUser._id);
+            }
+
         })();
 
         function renderUser(user){
             model.user = user;
+        }
+
+        function findClaimedRestaurant(){
+
+            restaurantService
+                .findRestForUser(currentUser._id)
+                .then(function(response) {
+                    model.restaurant = response;
+                    console.log("restaurant id: " + model.restaurant.restaurantId);
+                });
+
         }
 
         function updateProfile(user) {

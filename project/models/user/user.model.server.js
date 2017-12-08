@@ -12,7 +12,6 @@ projUserModel.findUserByGoogleId    = findUserByGoogleId;
 projUserModel.deleteUser            = deleteUser;
 projUserModel.updateUser            = updateUser;
 
-
 module.exports = projUserModel;         // the service layer can call projUserModel.createUser();
 
 function createUser(user){
@@ -44,7 +43,6 @@ function deleteUser(userId){
     return projUserModel.remove({_id: userId});
 }
 
-
 function updateUser(userId, user){
     // delete user.username;                           // ignore username update if (used with $set : user)
     return projUserModel.update({_id: userId}, {
@@ -55,3 +53,4 @@ function updateUser(userId, user){
         }
     });
 }
+

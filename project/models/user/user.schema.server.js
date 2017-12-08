@@ -13,8 +13,8 @@ var projUserSchema = mongoose.Schema({
     email:       String,
     phone:       String,
     roles:       [{type: String, default: 'PUBUSER', enum: ['PUBUSER', 'SELLER', 'ADMIN']}],
-    restaurant:  [{type: mongoose.Schema.Types.ObjectId,
-                   ref: "RestaurantModel"}],
+    restaurant:  {type: mongoose.Schema.Types.ObjectId,
+                   ref: "RestaurantModel"},
     comment:     [{type: mongoose.Schema.Types.ObjectId,
                    ref: "CommentModel"}],
     dateCreated: {
