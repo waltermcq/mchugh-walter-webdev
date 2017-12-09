@@ -47,7 +47,8 @@
             </button>
 
             <h4>{{comment.body}}</h4>
-            <div class="input-group">
+            <div ng-if="model.user.roles.indexOf('ADMIN') > -1 || model.user._id === comment.user._id"
+                 class="input-group">
                 <input type="text"
                        class="form-control"
                        ng-model=comment.body
@@ -76,7 +77,8 @@
 </div>
 
 <!--TODO add padding to conform to above div-->
-<div class="container-fluid">
+<div ng-if="model.user.roles.indexOf('SELLER') == -1"
+     class="container-fluid">
     <div class="container-fluid">
         <div class="input-group">
             <input ng-model="commentBody"
