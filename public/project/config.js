@@ -7,12 +7,29 @@
     function configuration($routeProvider) {
 
         $routeProvider
-            // search
+            // public/anon search
             .when('/', {
-                templateUrl: '/project/views/search/templates/search.view.client.html',
-                controller: 'searchController',
+                templateUrl: '/project/views/pubsearch/templates/pubsearch.view.client.html',
+                controller: 'pubSearchController',
                 controllerAs: 'model'
             })
+            .when('/pub/search', {
+                templateUrl: '/project/views/pubsearch/templates/pubsearch.view.client.html',
+                controller: 'pubSearchController',
+                controllerAs: 'model'
+            })
+            .when('/pub/detail/:rid', {
+                templateUrl: '/project/views/pubsearch/templates/pubdetail.view.client.html',
+                controller: 'pubDetailController',
+                controllerAs: 'model'
+            })
+
+            // search
+            // .when('/', {
+            //     templateUrl: '/project/views/search/templates/search.view.client.html',
+            //     controller: 'searchController',
+            //     controllerAs: 'model'
+            // })
             .when('/search', {
                 templateUrl: '/project/views/search/templates/search.view.client.html',
                 controller: 'searchController',

@@ -1,0 +1,50 @@
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#!/login">
+                Log In
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/profile">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Find food deals in Boston!</h2>
+            <div class="input-group input-group-lg">
+                <input ng-model="model.queryText"
+                       type="text"
+                       class="form-control input-lg"
+                       placeholder="Thai"/>
+                <span class="input-group-btn">
+                    <button ng-click="model.search(model.queryText)"
+                            class="btn btn-info btn-lg"
+                            type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <ul class="list-group">
+        <li ng-repeat="restaurant in model.restaurants"
+            ng-click="model.getDetails(restaurant.restaurant.id)"
+            class="list-group-item searchresult">
+            <h4 class="thick">
+                <a href="#!/pub/detail/{{restaurant.restaurant.id}}">
+                    {{restaurant.restaurant.name}}
+                </a>
+            </h4>
+            <h5 class="italic">Area: {{restaurant.restaurant.location.locality}}</h5>
+            <h5>Cuisine: {{restaurant.restaurant.cuisines}}</h5>
+        </li>
+    </ul>
+</div>

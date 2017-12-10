@@ -1,0 +1,51 @@
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/pubsearch" class="navbar-link ">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#!/pubsearch">
+                Back to Search
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#!/profile">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div ng-show="model.message" class="alert alert-info">
+        {{model.message}}
+    </div>
+</div>
+<div class="container-fluid">
+    <h2>{{model.restaurant.name}} - Details</h2>
+    <img ng-src="{{model.restaurant.thumb}}" width="200px">
+    <h5>{{model.restaurant.location.address}}</h5>
+</div>
+
+<div class="container-fluid">
+    <h3>What users say about {{model.restaurant.name}}:</h3>
+    <ul class="list-group">
+        <li ng-repeat="comment in model.comments"
+            class="list-group-item searchresult">
+
+            <h4>{{comment.body}}</h4>
+
+            <h5 class="italic">By user {{comment.user.username}} on {{comment.dateCreated | date}}</h5>
+            <h5 ng-if="comment.replyText.length > 0"
+                class="italic">Reply by {{model.restaurant.name}}: {{comment.replyText}}</h5>
+        </li>
+    </ul>
+
+    <h4> Want to share your thoughts on {{model.restaurant.name}}?</h4>
+
+    <a class="btn btn-success btn-lg"
+       href="#!/login">Login to FoodEngine</a>
+
+</div>
+

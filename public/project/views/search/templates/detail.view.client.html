@@ -61,7 +61,8 @@
             </div>
             <h5 class="italic">By user {{comment.user.username}} on {{comment.dateCreated | date}}<h5>
             <h5 class="italic">Reply by {{model.restaurant.name}}: {{comment.replyText}}<h5>
-            <div class="input-group">
+            <div ng-if="model.user.roles.indexOf('SELLER') > -1"
+                 class="input-group">
                 <input type="text"
                        class="form-control"
                        ng-model=replyText
