@@ -23,17 +23,14 @@
                 controller: 'pubDetailController',
                 controllerAs: 'model'
             })
-
-            // search
-            // .when('/', {
-            //     templateUrl: '/project/views/search/templates/search.view.client.html',
-            //     controller: 'searchController',
-            //     controllerAs: 'model'
-            // })
+            // logged in user search
             .when('/search', {
                 templateUrl: '/project/views/search/templates/search.view.client.html',
                 controller: 'searchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             .when('/detail/:rid', {
                 templateUrl: '/project/views/search/templates/detail.view.client.html',
@@ -62,16 +59,17 @@
                     currentUser: checkLoggedIn      // whatever checkLoggedIn returns (e.g. user) becomes an injectable object 'currentUser'
                 }
             })
-            // .when('/admin/admin', {
-            //     templateUrl: '/project/views/admin/templates/admin-user.view.client.html',
-            //     controller: 'adminUserController',
-            //     controllerAs: 'model',
-            //     resolve: {
-            //         currentUser: checkAdmin
-            //     }
-            // })
+            // site administration
+            .when('/admin', {
+                templateUrl: '/project/views/admin/templates/admin-home.view.client.html',
+                controller: 'adminHomeController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
             .otherwise({
-                redirectTo: "/search"
+                redirectTo: '/'
             });
     } //config
 

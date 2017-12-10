@@ -61,7 +61,7 @@
     <a class="btn btn-success btn-block"
        href="#!/search">Search for Restaurants</a>
 
-    <a ng-if="model.user.roles.indexOf('SELLER') > -1 "
+    <a ng-if="model.user.roles.indexOf('SELLER') > -1 && model.user.roles.indexOf('ADMIN') == -1"
        class="btn btn-success btn-block"
        href="#!/detail/{{model.restaurant.restaurantId}}">Manage My Claimed Restaurant</a>
 
