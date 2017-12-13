@@ -32,7 +32,7 @@
 
             return $http.get(url)
                 .then( function(response){
-                    return response.data;       //unwrap data from response object; transparent to controller
+                    return response.data;
                 });
         }
 
@@ -42,7 +42,7 @@
 
             return $http.get(url)
                 .then( function(response){
-                    return response.data;       //unwrap data from response object; transparent to controller
+                    return response.data;
                 });
         }
 
@@ -50,7 +50,7 @@
 
             var url = '/api/project/restaurant/' + restaurantId;
 
-            return $http.post(url, restaurant)   // url, then data
+            return $http.post(url, restaurant)
                 .then( function(response){
                     return response.data;
                 });
@@ -60,7 +60,7 @@
 
             var url = '/api/project/restaurant/' + restaurantId;
 
-            return $http.put(url, restaurant)   // url, then data
+            return $http.put(url, restaurant)
                 .then( function(response){
                     return response.data;
                 });
@@ -70,7 +70,7 @@
 
             var url = '/api/project/restaurant/' + restaurantId;
 
-            return $http.delete(url, restaurant)   // url, then data
+            return $http.delete(url, restaurant)
                 .then( function(response){
                     return response.data;
                 });

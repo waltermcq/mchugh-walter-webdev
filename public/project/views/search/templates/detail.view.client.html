@@ -19,8 +19,9 @@
 </nav>
 
 <div class="container-fluid">
-    <a ng-click="model.claimRestaurant(model.rid)"
-    class="btn btn-danger">Claim Restaurant</a>
+    <a ng-if="model.user.roles.indexOf('SELLER') > -1"
+       ng-click="model.claimRestaurant(model.rid)"
+       class="btn btn-danger">Claim Restaurant</a>
     <p>
 </div>
 <div class="container-fluid">

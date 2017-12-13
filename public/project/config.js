@@ -62,7 +62,23 @@
             // site administration
             .when('/admin', {
                 templateUrl: '/project/views/admin/templates/admin-home.view.client.html',
-                controller: 'adminHomeController',
+                // controller: 'adminHomeController',
+                // controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/user', {
+                templateUrl: '/project/views/admin/templates/admin-user.view.client.html',
+                controller: 'adminUserController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/restaurant', {
+                templateUrl: '/project/views/admin/templates/admin-rest.view.client.html',
+                controller: 'adminRestController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkAdmin

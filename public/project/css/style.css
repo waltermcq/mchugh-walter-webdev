@@ -34,9 +34,8 @@ a:hover {
     border: 1px solid #ddd;
 }
 
-/*.btn-comment {*/
-    /*margin-top: 14px;*/
-    /*margin-left: 4px;*/
-/*}*/
+.max1160 {
+    max-width: 1160px;
+}
 
-/*max-width: 1160px;*/
+

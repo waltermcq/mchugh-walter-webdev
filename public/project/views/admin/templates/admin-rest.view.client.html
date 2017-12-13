@@ -1,0 +1,67 @@
+<nav class="navbar navbar-flat navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/admin" class="navbar-link ">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="">
+                Site Administration - Restaurants
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div ng-show="model.message"
+         class="alert alert-info">
+        {{model.message}}
+    </div>
+
+    <ul class="list-group">
+        <li ng-repeat="rest in model.restaurants"
+            class="list-group-item">
+
+                <span class="btn-group pull-right">
+                    <a ng-click="model.deleteRest(rest)" class="btn btn-danger" type="button">
+                        <span class="glyphicon glyphicon-remove"></span>
+                     </a>
+                </span>
+            <span class="btn-group pull-right">
+                    <a ng-click="model.updateRest(rest)" class="btn btn-warning" type="button">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                     </a>
+                </span>
+
+            <h5>Seller Obj</h5>
+            <input type="text"
+                   class="form-control"
+                   ng-model=rest.user>
+            <h5>Offer Code: {{rest.offer}}</h5>
+            <input type="text"
+                   class="form-control"
+                   ng-model=rest.offer>
+            <h5>Restaurant's Zomato ID: {{rest.restaurantId}}</h5>
+            <input type="text"
+                   class="form-control"
+                   ng-model=rest.restaurantId>
+            <h5>Date Created: {{rest.dateClaimed}}</h5>
+            <input type="text"
+                   class="form-control"
+                   ng-model=rest.dateClaimed>
+        </li>
+    </ul>
+
+</div>
+
+<nav class="navbar navbar-fixed-bottom navbar-flat">
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#!/profile" class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </p>
+    </div>
+</nav>
