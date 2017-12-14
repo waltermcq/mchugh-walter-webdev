@@ -13,6 +13,10 @@ body {
     width: 100%;
 }
 
+.navbar-flat {
+    background-color: #cbe1f5;
+}
+
 a:hover {
     text-decoration-line: none;
 }
@@ -34,8 +38,16 @@ a:hover {
     border: 1px solid #ddd;
 }
 
-.max1160 {
-    max-width: 1160px;
+.max1024 {
+    max-width: 1024px;
 }
 
+.max440 {
+    max-width: 440px;
+}
+
+.col-center {
+    float: none;
+    margin: 0 auto;
+}
 

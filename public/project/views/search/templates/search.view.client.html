@@ -1,9 +1,9 @@
 <nav class="navbar navbar-flat navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#!/login">
-                Log In
-            </a>
+                <a class="navbar-brand pull-left" href="">
+                    FoodEngine
+                </a>
             <p class="navbar-text pull-right">
                 <a href="#!/profile">
                     <span class="glyphicon glyphicon-user pull-right"></span>
@@ -15,7 +15,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-center">
             <h2>Find food deals in Boston!</h2>
             <div class="input-group input-group-lg">
                 <input ng-model="model.queryText"
@@ -33,7 +33,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid max440">
     <ul class="list-group">
         <li ng-repeat="restaurant in model.restaurants"
             ng-click="model.getDetails(restaurant.restaurant.id)"
