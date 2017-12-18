@@ -17,24 +17,26 @@
         </div>
     </div>
 </nav>
-
-<div class="container-fluid">
-    <a ng-if="model.user.roles.indexOf('SELLER') > -1"
-       ng-click="model.claimRestaurant(model.rid)"
-       class="btn btn-danger">Claim Restaurant</a>
-    <p>
-</div>
-<div class="container-fluid">
-    <div ng-show="model.message" class="alert alert-info">
-        {{model.message}}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <div class="">
+            <a ng-if="model.user.roles.indexOf('SELLER') > -1"
+               ng-click="model.claimRestaurant(model.rid)"
+               class="btn btn-danger">Claim Restaurant</a>
+            <p>
+        </div>
+        <div class="">
+            <div ng-show="model.message" class="alert alert-info">
+                {{model.message}}
+            </div>
+        </div>
+        <div class="">
+            <h2>{{model.restaurant.name}}</h2>
+            <img ng-src="{{model.restaurant.thumb}}" width="200px">
+            <h5>{{model.restaurant.location.address}}</h5>
+        </div>
     </div>
 </div>
-<div class="container-fluid">
-    <h2>{{model.restaurant.name}}</h2>
-    <img ng-src="{{model.restaurant.thumb}}" width="200px">
-    <h5>{{model.restaurant.location.address}}</h5>
-</div>
-
 <div class="container-fluid max1024">
     <h3>What users said about {{model.restaurant.name}}:</h3>
     <ul class="list-group">
@@ -80,7 +82,7 @@
 
 <!--TODO add padding to conform to above div-->
 <div ng-if="model.user.roles.indexOf('SELLER') == -1"
-     class="container-fluid">
+     class="container-fluid max1024">
     <div class="container-fluid">
         <div class="input-group">
             <input ng-model="commentBody"
