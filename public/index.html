@@ -1,33 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Web Dev Course Home Page</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>One Page Wonder - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="project/homepage/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="project/homepage/css/one-page-wonder.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
-    <h1>Web Dev Course Home Page</h1>
 
-    <p>
-        This is the homepage for Walter's Web Development work.
-    </p>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Walter McHugh</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#foodengine">FoodEngine</a>
+                    </li>
+                    <li>
+                        <a href="#webappmaker">WebAppMaker</a>
+                    </li>
+                    <li>
+                        <a href="#info">Misc & Info</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-    <h2>Links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Course Project</a>
-        </li>
-        <li>
-            <a href="project/poc/index.html">Project Proof of Concept</a>
-        </li>
-        <li>
-            <a href="assignment/index.html">Most Recent Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/waltermcq/mchugh-walter-webdev">Walter's public repository at GitHub.com</a>
-        </li>
-    </ul>
+    <!-- Full Width Image Header -->
+    <header class="header-image">
+        <div class="headline">
+            <div class="container">
+                <h2>Walter McHugh</h2>
+                <h2>⇩built these things⇩</h2>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <hr class="featurette-divider">
+
+        <!-- First Featurette -->
+        <div class="featurette" id="foodengine">
+            <img class="featurette-image img-circle img-responsive pull-right" src="project/homepage/img/foodengine.jpg">
+            <h2 class="featurette-heading"><a href="project/index.html">FoodEngine</a>
+                <span class="text-muted">Will Find You Tastythings in Boston</span>
+            </h2>
+            <p class="lead">FoodEngine is a dynamic web app for finding Boston-area restaurants and seeing/making reviews. FoodEngine was built from the ground up with Node.js, Express, MongoDB (with Mongoose), and AngularJS, and utilizing the Zomato developer API for location information on the client side.  It's mobile responsive, features 4 user account types, persistent sessions, authentication with Passport.js, and you can login with Google+.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- Second Featurette -->
+        <div class="featurette" id="webappmaker">
+            <img class="featurette-image img-circle img-responsive pull-left" src="project/homepage/img/vanilla_latte.jpg">
+            <h2 class="featurette-heading"><a href="assignment/index.html">WebAppMaker</a>
+                <span class="text-muted">Is Pretty Cool Too.</span>
+            </h2>
+            <p class="lead">WebAppMaker is a blogger-clone single-page app allowing users to create simple blog pages with various types of widgets.  WebAppMaker is also a MEAN stack application, and was the kernal of the coursework of Northeastern's CS 5610 Web App Development course. Do you love bootstrap? If so, you'll love it. Note: no landing page, just register and try it out.</p>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- Third Featurette -->
+
+        <div class="list-group text-center" id="info">
+            <a class="list-group-item" href="project/index.html">
+                <i class="fa fa-fighter-jet fa-2x " aria-hidden="true"></i>
+                <span class="misc">&nbsp; Course Project - FoodEngine</span>
+            </a>
+            <a class="list-group-item" href="project/poc/index.html">
+                <i class="fa fa-hand-spock-o fa-2x " aria-hidden="true"></i>
+                <span class="misc">&nbsp; Project Proof-of-Concept (Test Zomato API)</span>
+            </a>
+            <a class="list-group-item" href="assignment/index.html">
+                <i class="fa fa-home fa-2x " aria-hidden="true"></i>
+                <span class="misc">&nbsp; Most Recent Assignment - WebAppMaker</span>
+            </a>
+            <a class="list-group-item" href="test/index.html">
+                <i class="fa fa-database fa-2x " aria-hidden="true"></i>
+                <span class="misc">&nbsp; Test MongoDB on Hosted Environment</span>
+            </a>
+            <a class="list-group-item" href="https://github.com/waltermcq/mchugh-walter-webdev">
+                <i class="fa fa-github fa-2x " aria-hidden="true"></i>
+                <span class="misc">&nbsp; Walter's Github Repo for WebDev</span>
+            </a>
+            <a class="list-group-item" href="https://github.com/waltermcq">
+                <i class="fa fa-github fa-2x " aria-hidden="true"></i>
+                <span class="misc">&nbsp; Walter McHugh at Github.com</span>
+            </a>
+            <a class="list-group-item" href="mailto:waltermc@gmail.com?Subject=Howdy">
+                <i class="fa fa-envelope fa-2x " aria-hidden="true"></i>
+                <span class="misc">&nbsp; Email me: waltermc@gmail.com</span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Walter McHugh 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="project/homepage/js/jquery1_11_1/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="project/homepage/js/bootstrap/bootstrap.min.js"></script>
+
 </body>
+
 </html>
