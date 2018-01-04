@@ -4,7 +4,8 @@ var commentModel  = require('../models/comment/comment.model.server.js');
 
 app.get   ('/api/project/comment/:commentId',    findCommentById);
 app.get   ('/api/project/:restaurantId/comment', findAllCommentsforRest);
-app.get   ('/api/project/:restaurantId/comment', findAllComments);           //TODO isAdmin
+// app.get   ('/api/project/:restaurantId/comment', findAllComments);           //TODO isAdmin
+app.get   ('/api/project/comment/user/:userId',  findAllCommentsByUser);
 app.post  ('/api/project/:restaurantId/comment', createComment);
 app.put   ('/api/project/comment/:commentId',    updateComment);
 app.delete('/api/project/comment/:commentId',    deleteComment);
@@ -28,10 +29,24 @@ function findCommentById(req, res) {
         })
 }
 
-function findAllComments() {
+// function findAllComments() {
+//
+//     commentModel
+//         .findAllComments()
+//         .then(
+//             function(comments){
+//                 res.json(comments);
+//             },
+//             function(error){
+//                 res.sendStatus(404);
+//             });
+// }
+
+function findAllCommentsforRest(req, res) {
+    var restaurantId = req.params['restaurantId'];
 
     commentModel
-        .findAllComments()
+        .findAllCommentsForRest(restaurantId)
         .then(
             function(comments){
                 res.json(comments);
@@ -41,11 +56,11 @@ function findAllComments() {
             });
 }
 
-function findAllCommentsforRest(req, res) {
-    var restaurantId = req.params['restaurantId'];
+function findAllCommentsByUser(req, res) {
+    var userId = req.params['userId'];
 
     commentModel
-        .findAllCommentsForRest(restaurantId)
+        .findAllCommentsByUser(userId)
         .then(
             function(comments){
                 res.json(comments);

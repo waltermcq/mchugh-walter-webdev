@@ -77,20 +77,23 @@
     function profileController($location,
                                userService,
                                restaurantService,
+                               commentService,
                                currentUser) {
 
         var model = this;
         model.uid = currentUser._id;
 
-        model.updateProfile = updateProfile;
-        model.unregister = unregister;
-        model.logOut = logOut;
-        model.renderUser = renderUser;
+        model.updateProfile         = updateProfile;
+        model.unregister            = unregister;
+        model.logOut                = logOut;
+        model.renderUser            = renderUser;
         model.findClaimedRestaurant = findClaimedRestaurant;
+        model.getComments           = getComments;
 
         (function init(){
 
             renderUser(currentUser);
+            getComments(currentUser);
 
             if(currentUser.roles.indexOf('SELLER') > -1) {
                 findClaimedRestaurant(currentUser._id);
@@ -98,26 +101,36 @@
 
         })();
 
-        function renderUser(user){
+        function renderUser(user) {
             model.user = user;
         }
 
-        function findClaimedRestaurant(){
+        function findClaimedRestaurant() {
 
             restaurantService
                 .findRestForUser(currentUser._id)
                 .then(function(response) {
                     model.restaurant = response;
-                    console.log("restaurant id: " + model.restaurant.restaurantId);
+                    // console.log("restaurant id: " + model.restaurant.restaurantId);
                 });
 
+        }
+
+        function getComments(currentUser) {
+
+            commentService
+                .findAllCommentsByUser(currentUser._id)
+                .then( function(response){
+                    model.comments = response;
+                    console.log(response);
+                });
         }
 
         function updateProfile(user) {
             userService
                 .updateUser(model.uid, user)
                 .then(function () {
-                    model.message = "Profile updated successfully!";
+                    model.message = "Profile updated successfully!";    //TODO add failure branch
                 });
         }
 

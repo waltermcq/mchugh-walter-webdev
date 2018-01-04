@@ -77,6 +77,22 @@
 
 </div>
 
+<div class="container-fluid max1024">
+    <h3>
+        My Comments
+    </h3>
+
+    <ul class="list-group">
+        <li ng-repeat="comment in model.comments"
+            class="list-group-item searchresult">
+
+            <h4>{{comment.body}}</h4>
+            <h5 class="italic">For restaurant {{comment.restaurant}} on {{comment.dateCreated | date}}<h5>
+        </li>
+    </ul>
+
+</div>
+
 <nav class="navbar navbar-fixed-bottom navbar-flat">
     <div class="container-fluid">
         <p class="navbar-text pull-right">

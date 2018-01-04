@@ -3,6 +3,8 @@ var mongoose        = require('mongoose');
 var CommentSchema   = require('./comment.schema.server.js');
 var CommentModel    = mongoose.model('CommentModel', CommentSchema);  // must be unique across app; DB collection name
 
+var ObjectID = require('mongodb').ObjectID;
+
 CommentModel.createComment          = createComment;
 CommentModel.findCommentById        = findCommentById;
 CommentModel.findAllComments        = findAllComments;
@@ -31,9 +33,8 @@ function findAllComments() {
 }
 
 function findAllCommentsByUser(userId) {
-    return CommentModel.find({user: userId})
-        .populate('user')
-        .exec();
+    return CommentModel
+        .find({'user': new ObjectID(userId)});
 }
 
 function findAllCommentsForRest(restaurantId) {

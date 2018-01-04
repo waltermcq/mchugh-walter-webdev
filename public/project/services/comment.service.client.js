@@ -10,6 +10,8 @@
             findCommentById:        findCommentById,
             findAllCommentsForRest: findAllCommentsForRest,
             // findAllComments:        findAllComments,     TODO implement
+
+            findAllCommentsByUser:  findAllCommentsByUser,
             createComment:          createComment,
             updateComment:          updateComment,
             deleteComment:          deleteComment,
@@ -43,6 +45,16 @@
         function findAllCommentsForRest(restaurantId){
 
             var url = '/api/project/' + restaurantId + '/comment';
+
+            return $http.get(url)
+                .then( function(response){
+                    return response.data;
+                });
+        }
+
+        function findAllCommentsByUser(userId){
+
+            var url = '/api/project/comment/user/' + userId;
 
             return $http.get(url)
                 .then( function(response){
