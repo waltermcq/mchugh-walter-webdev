@@ -1,19 +1,15 @@
-# web-dev-template
+# MEAN Stack SPAs - FoodEngine, WebAppMaker
 
-About the Author
+## About this Repository
 
- I am a graduate student at Northeastern University, almost finished with an M.A. program in Data Science.  I have interests and experience in labor market research, statistics, data mining, machine learning, data viz, social network
- analysis, and product design.  I am currently an RA for Prof. Sasser-Modestino, and my current project is a cybersecurity educator pipeline study.
+This repository is for a web app, FoodEngine, created for Northeastern's CS5610 course.
+FoodEngine is a single-page app built with the MEAN stack - Node.js, Express.js, AngularJS, and MongoDB
+(DB middleware is Mongoose.js).
 
-About this Repository
+This app is running in a hosted environment at:
+https://mchugh-walter-webdev.herokuapp.com/
 
- This repository is for a  web app / series of web apps created for Northeastern's CS5610 course.  The single-page dynamic apps are built on the MEAN stack,
- and the most recent commit is deployed to Heroku (the database uses the mlab MongoDB plugin).
-
- The link to the hosted environment is:
- https://mchugh-walter-webdev.herokuapp.com/
-
- The link to this repo is:
- https://github.com/waltermcq/mchugh-walter-webdev
+The link to this repo is:
+https://github.com/waltermcq/mchugh-walter-webdev
 
  
